@@ -3,15 +3,23 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body{
-    background-color: #112e54;
+    background-image: linear-gradient(rgba(17, 46, 84, 0.493), rgba(17, 46, 84, 0.493)), url(https://cdn.shortpixel.ai/spai/w_898+q_lossy+ret_img/https://www.eude.co/wp-content/uploads/sites/5/2021/01/Dise%C3%B1o-sin-t%C3%ADtulo-2021-01-27T132931.961-820x450.png);
     font-family: 'Segoe UI';
+    background-attachment: fixed;       
+    background-repeat: no-repeat;   
+    background-size: cover;           
+    background-position: center;
 }
+
+
 .container {
     max-width: 1380px;
     margin: 0 auto;
     padding: 0 25px;
 }
+
 header{
     position: fixed;
     top: 0;
@@ -21,12 +29,14 @@ header{
     z-index: 1000;
     position: sticky;
 }
+
 .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1.5rem 24px;
 }
+
 .nav__logo {
     display: flex;
     align-items: center;
@@ -35,17 +45,20 @@ header{
     font-weight: 800;
     text-decoration: none;
 }
+
 .nav__logo img {
     width: 40px;
     height: 40px;
     object-fit: contain;
 }
+
 .nav__menu {
     display: flex;
     list-style: none;
     gap: 2rem;
     align-items: center;
 }
+
 .nav__link {
     text-decoration: none;
     color: #000000;
@@ -57,21 +70,10 @@ header{
     font-size: 0.95rem;
     border-bottom: 3px solid transparent;
 }
+
 .nav__link:hover {
     color: #112e54;
     border-bottom: 3px solid #112e54;
-}
-.nav__link--busqueda {
-    color: #112e54;
-    font-weight: 600;
-    border: 1px solid #112e54;
-    border-radius: 100px;
-    margin-left: 1rem;
-}
-
-.nav__link--busqueda:hover {
-    background: #e0edff;
-    border-bottom: 1px solid #112e54;
 }
 
 .nav__link--login {
@@ -81,10 +83,12 @@ header{
     border-radius: 6px;
     margin-left: 0rem;
 }
+
 .nav__link--login:hover {
     background: #e0edff;
     border-bottom: 1px solid #112e54;
 }
+
 .nav__link--register {
     background: #112e54;
     color: #ffffff;
@@ -99,12 +103,62 @@ header{
     color: #ffffff;
     border-bottom: 1px solid #000000;
 }
+
+/* Hero principal para Index.html */
+.hero-main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.hero-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 3rem;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.hero-cta {
+    margin-bottom: 2rem;
+}
+
+.btn {
+    padding: 1.2rem 3rem;
+    background-color: #ffffff;
+    color: #112e54;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover {
+    background-color: #e0edff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Secciones FINHABITS */
 .seccion-1{
     background-color: #112e54;
     max-width: 2000px;
     margin: 0;
     padding: 0;
 }
+
 .main-content {
     padding-top: 100px;
     padding-bottom: 0;
@@ -113,6 +167,7 @@ header{
     margin-left: auto;
     margin-right: auto;
 }
+
 .hero-section {
     text-align: center;
     margin-bottom: 4rem;
@@ -120,13 +175,12 @@ header{
     padding: 4rem 2rem;
 }
 
-.hero-title {
+.hero-section .hero-title {
     font-size: 4rem;
     font-weight: 800;
     color: #ffffff;
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px #000000;
-
 }
 
 .hero-subtitle {
@@ -139,6 +193,7 @@ header{
     margin: 0 auto;
     padding-bottom: 2rem;
 }
+
 .interactive-card {
     border-radius: 20px;
     padding: 2rem;
@@ -169,12 +224,6 @@ header{
     border-color: #000000;
 }
 
-.service-card i {
-    font-size: 2.5rem;
-    color: #000000;
-    margin-bottom: 1rem;
-}
-
 .service-card h3 {
     color: #000000;
     margin-bottom: 0.5rem;
@@ -186,76 +235,89 @@ header{
     color: #000000;
     font-size: 1rem;
 }
+
 .seccion-2{
     background-color: #1d3e6a;
     max-width: 2000px;
     margin: 0;
     padding: 0;
 }
+
 .seccion-3{
     background-color: #2a4f80;
     max-width: 2000px;
     margin: 0;
     padding: 0;
 }
+
 .seccion-4{
     background-color: #366095;
     max-width: 2000px;
     margin: 0;
     padding: 0;
 }
+
 .seccion-5{
     background-color: #2a4f80;
     max-width: 2000px;
     margin: 0;
     padding: 0;
 }
+
 .seccion-6{
     background-color: #1d3e6a;
     max-width: 2000px;
     margin: 0;
     padding: 0;
 }
+
 .seccion-7{
     background-color: #112e54;
     max-width: 2000px;
     margin: 0;
     padding: 0;
 }
+
 .seccion-8{
     background-color: #1d3e6a;
     max-width: 2000px;
     margin: 0;
     padding: 0;
 }
+
 .seccion-9{
     background-color: #2a4f80;
     max-width: 2000px;
     margin: 0;
     padding: 0;
 }
+
 .seccion-10{
     background-color: #366095;
     max-width: 2000px;
     margin: 0;
     padding: 0;
 }
+
 .footer {
     background-color: #f1f7ff;
     border-top: 4px solid #000000;
     padding: 60px 0 30px;
 }
+
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
+
 .footer-top {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 40px;
     margin-bottom: 40px;
 }
+
 .footer-section h3 {
     color: #112e54;
     font-size: 1.1rem;
@@ -264,12 +326,15 @@ header{
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
 .footer-section ul {
     list-style: none;
 }
+
 .footer-section ul li {
     margin-bottom: 12px;
 }
+
 .footer-section ul li a {
     color: #112e54;
     text-decoration: none;
@@ -277,10 +342,17 @@ header{
     transition: all 0.3s ease;
     position: relative;
 }
+
 .footer-section ul li a:hover {
     color: #000000;
     transform: translateX(5px);
 }
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
 .social-icon {
     width: 35px;
     height: 35px;
@@ -292,11 +364,19 @@ header{
     justify-content: center;
     transition: all 0.3s ease;
     color: #ffffff;
+    text-decoration: none;
 }
+
 .social-icon:hover {
     background-color: #1b467e;
     transform: translateY(-3px);
 }
+
+.footer-bottom {
+    border-top: 1px solid #112e54;
+    padding-top: 20px;
+}
+
 .footer-legal {
     display: flex;
     gap: 30px;
@@ -304,8 +384,8 @@ header{
     justify-content: center;   
     align-items: center; 
     text-align: center;
+    margin-bottom: 20px;
 }
-
 
 .footer-legal a {
     color: #112e54;
@@ -326,4 +406,24 @@ header{
     border-top: 1px solid #112e54;
     font-size: 0.8rem;
     color: #112e54;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav__menu {
+        display: none;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }
