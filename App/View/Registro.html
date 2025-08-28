@@ -16,50 +16,91 @@
                 Volver al inicio
             </a>
             
-            <form class="auth-form" id="registerForm">
+            <form class="auth-form" action="../Controler/registro_Ctrl.php" method="POST" accept-charset="utf-8">
                 <h1>Crear cuenta</h1>
                 <p class="subtitle">Únete a miles de personas que ya están transformando sus finanzas</p>
-
+                
+                <!-- Mensajes de respuesta del servidor -->
+                <div id="mensajes">
+                    <script>
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const mensaje = urlParams.get('mensaje');
+                        const mensajesDiv = document.getElementById('mensajes');
+                        
+                        if (mensaje) {
+                            let alertClass, alertMessage;
+                            
+                            switch(mensaje) {
+                                case 'ingreso':
+                                    alertClass = 'alert-success';
+                                    alertMessage = 'Se registraron los datos correctamente. Redirigiendo...';
+                                    setTimeout(() => {
+                                        window.location.href = '../View/Inicio_Sesion.php';
+                                    }, 2000);
+                                    break;
+                                case 'noingreso':
+                                    alertClass = 'alert-danger';
+                                    alertMessage = 'No se pudo registrar el usuario, verifique los datos';
+                                    break;
+                                case 'correoeexiste':
+                                    alertClass = 'alert-danger';
+                                    alertMessage = 'El correo electrónico ya está registrado';
+                                    break;
+                                default:
+                                    alertClass = '';
+                                    alertMessage = '';
+                            }
+                            
+                            if (alertMessage) {
+                                mensajesDiv.innerHTML = `<div class="alert ${alertClass}">${alertMessage}</div>`;
+                            }
+                        }
+                    </script>
+                </div>
+                
                 <div class="form-row">
                     <div class="form-group">
-                        <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                        <input type="text" name="nombre" placeholder="Nombre" required minlength="2" pattern="[A-Za-zÁáÉéÍíÓóÚúÑñ ]{2,50}">
                     </div>
                     <div class="form-group">
-                        <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+                        <input type="text" name="apellido" placeholder="Apellido" required minlength="2" pattern="[A-Za-zÁáÉéÍíÓóÚúÑñ ]{2,50}">
                     </div>
                 </div>
-
+                
                 <div class="form-row">
                     <div class="form-group">
-                        <input type="email" id="correo" name="correo" placeholder="Correo Electrónico" required>
+                        <input type="email" name="correo" placeholder="Correo Electrónico" required>
                     </div>
                     <div class="form-group">
-                        <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
+                        <input type="tel" name="telefono" placeholder="Teléfono" required pattern="[0-9]{10}" title="Ingrese exactamente 10 dígitos">
                     </div>
                 </div>
-
+                
                 <div class="form-row">
-                    <div class="form-group password-field">
-                        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+                    <div class="form-group">
+                        <input type="password" name="contrasena" placeholder="Contraseña" required minlength="6">
                     </div>
-                    <div class="form-group password-field">
-                        <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" placeholder="Confirmar contraseña" required>
+                    <div class="form-group">
+                        <input type="password" name="confirmar_contrasena" placeholder="Confirmar contraseña" required minlength="6">
                     </div>
                 </div>
-
+                
                 <div class="checkbox-group">
                     <input type="checkbox" id="terminos" name="terminos" required>
                     <label for="terminos">
                         Acepto los <a href="#">Términos y Condiciones</a> y la <a href="#">Política de Privacidad</a>
                     </label>
                 </div>
-                <button type="submit" class="btn-primary" id="submitBtn">
+                
+                <button type="submit" class="btn-primary">
                     Crear cuenta
                 </button>
+                
                 <div class="divider">
                     <span>o regístrate con</span>
                 </div>
-<div class="social-auth-row">
+
+                <div class="social-auth-row">
                     <button type="button" class="btn-social btn-google">
                         <i class="fab fa-google"></i>
                         Continuar con Google
@@ -69,17 +110,58 @@
                         Continuar con Apple
                     </button>
                 </div>
+                
                 <div class="auth-footer">
                     ¿Ya tienes cuenta? <a href="../View/Inicio_Sesion.html">Inicia sesión aquí</a>
                 </div>
             </form>
         </section>
-
+        
         <section class="derecha">
             <div class="logo">FinHabits</div>
             <h2>Transforma tu futuro financiero</h2>
             <p>Únete a nuestra comunidad y descubre cómo pequeños cambios en tus hábitos pueden generar grandes resultados en tus finanzas personales.</p>
         </section>
     </section>
+    
+    <!-- Script mínimo para validación básica -->
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const contrasena = document.querySelector('input[name="contrasena"]').value;
+            const confirmarContrasena = document.querySelector('input[name="confirmar_contrasena"]').value;
+            
+            if (contrasena !== confirmarContrasena) {
+                e.preventDefault();
+                alert('Las contraseñas no coinciden');
+                return false;
+            }
+        });
+
+        // Validación en tiempo real para números en teléfono
+        document.querySelector('input[name="telefono"]').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    </script>
+
+    <style>
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
 </body>
 </html>

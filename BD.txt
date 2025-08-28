@@ -1,0 +1,366 @@
+DROP DATABASE IF EXISTS finhabits;
+CREATE DATABASE finhabits;
+USE finhabits;
+
+SET NAMES utf8mb4;
+SET character_set_client = utf8mb4;
+
+CREATE TABLE roles (
+    id_rol INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(150) NOT NULL UNIQUE,
+    descripcion TEXT,
+    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    activo BOOLEAN DEFAULT TRUE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    correo VARCHAR(100) UNIQUE NOT NULL,
+    contrasena VARCHAR(255) NOT NULL,
+    telefono VARCHAR(10) NOT NULL,
+    activo TINYINT(1) DEFAULT 1,
+    id_rol INT DEFAULT 2
+);
+
+CREATE TABLE categorias (
+    id_categoria INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(200) NOT NULL,
+    tipo ENUM('ingreso', 'gasto') NOT NULL,
+    descripcion TEXT,
+    icono VARCHAR(50),
+    color VARCHAR(7) DEFAULT '#3498db',
+    activo BOOLEAN DEFAULT TRUE,
+    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- 4. TABLA PERFIL FINANCIERO
+-- =====================================================
+CREATE TABLE perfil_financiero (
+    id_perfil INT AUTO_INCREMENT PRIMARY KEY,
+    tipo_ingreso ENUM('Fijo','Variado') NOT NULL,
+    nivel_ingreso DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    nivel_endeudamiento DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    habito_ahorro VARCHAR(200),
+    comentarios TEXT,
+    fecha_actualizacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- 5. TABLA METAS
+-- =====================================================
+CREATE TABLE metas (
+    id_meta INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(150) NOT NULL,
+    descripcion TEXT,
+    monto_objetivo DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    monto_actual DECIMAL(15,2) DEFAULT 0.00,
+    fecha_inicio DATE DEFAULT (CURRENT_DATE),
+    fecha_limite DATE,
+    estado ENUM('Completado','En proceso','En pausa','Cancelado') DEFAULT 'En proceso',
+    prioridad ENUM('Alta','Media','Baja') DEFAULT 'Media',
+    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_actualizacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+    INDEX idx_usuario_estado (id_usuario, estado)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- 6. TABLA PRESUPUESTOS
+-- =====================================================
+CREATE TABLE presupuestos (
+    id_presupuesto INT AUTO_INCREMENT PRIMARY KEY,
+    mes INT NOT NULL CHECK (mes BETWEEN 1 AND 12),
+    año INT NOT NULL CHECK (año >= 2020),
+    total_ingresos DECIMAL(15,2) DEFAULT 0.00,
+    total_gastos DECIMAL(15,2) DEFAULT 0.00,
+    saldo_estimado DECIMAL(15,2) DEFAULT 0.00,
+    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_actualizacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+    UNIQUE KEY unique_usuario_mes_año (id_usuario, mes, año)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- 7. TABLA TRANSACCIONES (UNIFICADA)
+-- =====================================================
+CREATE TABLE transacciones (
+    id_transaccion INT AUTO_INCREMENT PRIMARY KEY,
+    tipo ENUM('ingreso', 'gasto') NOT NULL,
+    monto DECIMAL(15,2) NOT NULL,
+    fecha DATE NOT NULL,
+    descripcion TEXT,
+    es_recurrente BOOLEAN DEFAULT FALSE,
+    frecuencia_recurrente ENUM('diario', 'semanal', 'quincenal', 'mensual', 'anual'),
+    inusual BOOLEAN DEFAULT FALSE,
+    comprobante VARCHAR(255),
+    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    id_categoria INT,
+    id_usuario INT,
+    id_meta INT NULL, -- Para asociar gastos/ingresos con metas específicas
+    FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria) ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_meta) REFERENCES metas(id_meta) ON DELETE SET NULL ON UPDATE CASCADE,
+    INDEX idx_usuario_fecha (id_usuario, fecha),
+    INDEX idx_tipo_fecha (tipo, fecha),
+    INDEX idx_categoria (id_categoria)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- 8. TABLA SESIONES
+-- =====================================================
+CREATE TABLE sesiones (
+    id_sesion INT AUTO_INCREMENT PRIMARY KEY,
+    fecha_inicio DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha_fin DATETIME,
+    ip VARCHAR(45), -- Para IPv4 e IPv6
+    user_agent TEXT,
+    activa BOOLEAN DEFAULT TRUE,
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+    INDEX idx_usuario_activa (id_usuario, activa)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- 9. TABLA REPORTES
+-- =====================================================
+CREATE TABLE reportes (
+    id_reporte INT AUTO_INCREMENT PRIMARY KEY,
+    tipo_reporte ENUM('mensual','semanal','por_categoria','gastos_inusuales','comparacion_mes','presupuesto_vs_gasto','anual') NOT NULL,
+    titulo VARCHAR(255),
+    fecha_generacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha_inicio DATE,
+    fecha_fin DATE,
+    contenido LONGTEXT,
+    parametros JSON,
+    estado ENUM('generando', 'completado', 'error') DEFAULT 'completado',
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+    INDEX idx_usuario_tipo (id_usuario, tipo_reporte)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- 10. TABLA ALERTAS
+-- =====================================================
+CREATE TABLE alertas (
+    id_alerta INT AUTO_INCREMENT PRIMARY KEY,
+    tipo_alerta ENUM('presupuesto_excedido', 'meta_proxima', 'gasto_inusual', 'recordatorio_pago', 'ingreso_recibido', 'personalizada') DEFAULT 'personalizada',
+    titulo VARCHAR(255) NOT NULL,
+    mensaje TEXT NOT NULL,
+    fecha_activacion DATETIME,
+    fecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha_leida DATETIME,
+    personalizada BOOLEAN DEFAULT FALSE,
+    activa BOOLEAN DEFAULT TRUE,
+    prioridad ENUM('Alta','Media','Baja') DEFAULT 'Media',
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+    INDEX idx_usuario_activa (id_usuario, activa),
+    INDEX idx_fecha_activacion (fecha_activacion)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- INSERTAR DATOS INICIALES
+-- =====================================================
+
+-- Insertar roles por defecto
+INSERT INTO roles (id_rol, nombre, descripcion) VALUES 
+(1, 'Administrador', 'Acceso completo al sistema con permisos administrativos'),
+(2, 'Usuario', 'Usuario normal con acceso a funcionalidades básicas'),
+(3, 'Premium', 'Usuario premium con acceso a funcionalidades avanzadas');
+
+-- Insertar categorías por defecto para gastos
+INSERT INTO categorias (nombre, tipo, descripcion, icono, color) VALUES 
+-- Categorías de gastos
+('Alimentación', 'gasto', 'Gastos en comida, supermercado, restaurantes', 'fas fa-utensils', '#e74c3c'),
+('Transporte', 'gasto', 'Combustible, transporte público, taxi', 'fas fa-car', '#f39c12'),
+('Vivienda', 'gasto', 'Alquiler, servicios públicos, mantenimiento', 'fas fa-home', '#3498db'),
+('Salud', 'gasto', 'Médicos, medicinas, seguros de salud', 'fas fa-heart', '#e67e22'),
+('Educación', 'gasto', 'Cursos, libros, matrícula', 'fas fa-graduation-cap', '#9b59b6'),
+('Entretenimiento', 'gasto', 'Cine, deportes, hobbies', 'fas fa-gamepad', '#1abc9c'),
+('Ropa', 'gasto', 'Vestimenta y accesorios', 'fas fa-tshirt', '#34495e'),
+('Tecnología', 'gasto', 'Dispositivos, software, internet', 'fas fa-laptop', '#95a5a6'),
+('Servicios', 'gasto', 'Servicios profesionales, suscripciones', 'fas fa-cogs', '#7f8c8d'),
+('Otros Gastos', 'gasto', 'Gastos varios no categorizados', 'fas fa-ellipsis-h', '#bdc3c7'),
+
+-- Categorías de ingresos
+('Salario', 'ingreso', 'Sueldo mensual o quincenal', 'fas fa-money-bill-wave', '#27ae60'),
+('Freelance', 'ingreso', 'Trabajos independientes', 'fas fa-laptop-code', '#2ecc71'),
+('Inversiones', 'ingreso', 'Dividendos, intereses, ganancias', 'fas fa-chart-line', '#16a085'),
+('Ventas', 'ingreso', 'Venta de productos o servicios', 'fas fa-store', '#f1c40f'),
+('Bonos', 'ingreso', 'Bonificaciones y premios', 'fas fa-gift', '#e67e22'),
+('Otros Ingresos', 'ingreso', 'Ingresos varios no categorizados', 'fas fa-plus-circle', '#3498db');
+
+-- =====================================================
+-- TRIGGERS PARA AUTOMATIZACIÓN
+-- =====================================================
+
+-- Trigger para actualizar monto actual de metas cuando se hace una transacción relacionada
+DELIMITER $$
+
+CREATE TRIGGER actualizar_meta_transaccion
+AFTER INSERT ON transacciones
+FOR EACH ROW
+BEGIN
+    IF NEW.id_meta IS NOT NULL THEN
+        UPDATE metas 
+        SET monto_actual = (
+            SELECT COALESCE(SUM(
+                CASE 
+                    WHEN tipo = 'ingreso' THEN monto 
+                    ELSE -monto 
+                END
+            ), 0)
+            FROM transacciones 
+            WHERE id_meta = NEW.id_meta
+        )
+        WHERE id_meta = NEW.id_meta;
+        
+        -- Verificar si la meta se completó
+        UPDATE metas 
+        SET estado = 'Completado'
+        WHERE id_meta = NEW.id_meta 
+        AND monto_actual >= monto_objetivo 
+        AND estado = 'En proceso';
+    END IF;
+END$$
+
+-- Trigger para actualizar presupuesto cuando se inserta una transacción
+CREATE TRIGGER actualizar_presupuesto_transaccion
+AFTER INSERT ON transacciones
+FOR EACH ROW
+BEGIN
+    DECLARE mes_transaccion INT;
+    DECLARE año_transaccion INT;
+    
+    SET mes_transaccion = MONTH(NEW.fecha);
+    SET año_transaccion = YEAR(NEW.fecha);
+    
+    -- Crear presupuesto si no existe
+    INSERT INTO presupuestos (mes, año, id_usuario, total_ingresos, total_gastos)
+    VALUES (mes_transaccion, año_transaccion, NEW.id_usuario, 0, 0)
+    ON DUPLICATE KEY UPDATE id_presupuesto = id_presupuesto;
+    
+    -- Actualizar totales
+    IF NEW.tipo = 'ingreso' THEN
+        UPDATE presupuestos 
+        SET total_ingresos = total_ingresos + NEW.monto,
+            saldo_estimado = total_ingresos + NEW.monto - total_gastos
+        WHERE mes = mes_transaccion 
+        AND año = año_transaccion 
+        AND id_usuario = NEW.id_usuario;
+    ELSE
+        UPDATE presupuestos 
+        SET total_gastos = total_gastos + NEW.monto,
+            saldo_estimado = total_ingresos - (total_gastos + NEW.monto)
+        WHERE mes = mes_transaccion 
+        AND año = año_transaccion 
+        AND id_usuario = NEW.id_usuario;
+    END IF;
+END$$
+
+DELIMITER ;
+
+-- =====================================================
+-- VISTAS ÚTILES
+-- =====================================================
+
+-- Vista para resumen financiero mensual por usuario
+CREATE VIEW vista_resumen_mensual AS
+SELECT 
+    u.id_usuario,
+    u.nombre,
+    YEAR(t.fecha) as año,
+    MONTH(t.fecha) as mes,
+    SUM(CASE WHEN t.tipo = 'ingreso' THEN t.monto ELSE 0 END) as total_ingresos,
+    SUM(CASE WHEN t.tipo = 'gasto' THEN t.monto ELSE 0 END) as total_gastos,
+    SUM(CASE WHEN t.tipo = 'ingreso' THEN t.monto ELSE -t.monto END) as saldo_neto
+FROM usuarios u
+LEFT JOIN transacciones t ON u.id_usuario = t.id_usuario
+GROUP BY u.id_usuario, YEAR(t.fecha), MONTH(t.fecha)
+ORDER BY u.id_usuario, año DESC, mes DESC;
+
+-- Vista para gastos por categoría
+CREATE VIEW vista_gastos_categoria AS
+SELECT 
+    u.id_usuario,
+    u.nombre as usuario,
+    c.nombre as categoria,
+    c.tipo,
+    SUM(t.monto) as total_categoria,
+    COUNT(t.id_transaccion) as cantidad_transacciones,
+    AVG(t.monto) as promedio_transaccion
+FROM usuarios u
+JOIN transacciones t ON u.id_usuario = t.id_usuario
+JOIN categorias c ON t.id_categoria = c.id_categoria
+WHERE t.tipo = 'gasto'
+GROUP BY u.id_usuario, c.id_categoria
+ORDER BY u.id_usuario, total_categoria DESC;
+
+-- =====================================================
+-- PROCEDIMIENTOS ALMACENADOS
+-- =====================================================
+
+DELIMITER $$
+
+-- Procedimiento para obtener dashboard del usuario
+CREATE PROCEDURE sp_dashboard_usuario(IN p_id_usuario INT)
+BEGIN
+    -- Resumen general
+    SELECT 
+        (SELECT SUM(monto) FROM transacciones WHERE id_usuario = p_id_usuario AND tipo = 'ingreso' AND MONTH(fecha) = MONTH(CURDATE()) AND YEAR(fecha) = YEAR(CURDATE())) as ingresos_mes,
+        (SELECT SUM(monto) FROM transacciones WHERE id_usuario = p_id_usuario AND tipo = 'gasto' AND MONTH(fecha) = MONTH(CURDATE()) AND YEAR(fecha) = YEAR(CURDATE())) as gastos_mes,
+        (SELECT COUNT(*) FROM metas WHERE id_usuario = p_id_usuario AND estado = 'En proceso') as metas_activas,
+        (SELECT COUNT(*) FROM alertas WHERE id_usuario = p_id_usuario AND activa = TRUE AND fecha_leida IS NULL) as alertas_pendientes;
+        
+    -- Últimas transacciones
+    SELECT t.*, c.nombre as categoria_nombre, c.icono, c.color
+    FROM transacciones t
+    JOIN categorias c ON t.id_categoria = c.id_categoria
+    WHERE t.id_usuario = p_id_usuario
+    ORDER BY t.fecha DESC, t.fecha_creacion DESC
+    LIMIT 5;
+    
+    -- Metas próximas a vencer
+    SELECT *
+    FROM metas
+    WHERE id_usuario = p_id_usuario 
+    AND estado = 'En proceso'
+    AND fecha_limite <= DATE_ADD(CURDATE(), INTERVAL 30 DAY)
+    ORDER BY fecha_limite ASC
+    LIMIT 3;
+END$$
+
+DELIMITER ;
+
+-- =====================================================
+-- ÍNDICES ADICIONALES PARA OPTIMIZACIÓN
+-- =====================================================
+
+-- Índices compuestos para consultas frecuentes
+CREATE INDEX idx_transacciones_usuario_fecha_tipo ON transacciones(id_usuario, fecha, tipo);
+CREATE INDEX idx_metas_usuario_estado ON metas(id_usuario, estado);
+CREATE INDEX idx_alertas_usuario_fecha ON alertas(id_usuario, fecha_activacion);
+
+-- =====================================================
+-- CONFIGURACIÓN FINAL
+-- =====================================================
+
+-- Configurar zona horaria (ajustar según tu región)
+-- SET time_zone = '-05:00'; -- Para Colombia
+
+-- Mostrar información de las tablas creadas
+SELECT 
+    TABLE_NAME as 'Tabla',
+    TABLE_ROWS as 'Filas',
+    ROUND(((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024), 2) as 'Tamaño (MB)'
+FROM information_schema.TABLES 
+WHERE TABLE_SCHEMA = 'finhabits'
+ORDER BY TABLE_NAME;
