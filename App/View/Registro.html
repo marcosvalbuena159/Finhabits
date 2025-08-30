@@ -11,51 +11,14 @@
 <body>
     <section class="container">
         <section class="izquierda">
-            <a href="../../home.html" class="back-home">
+            <a href="./home.html" class="back-home">
                 <i class="fas fa-arrow-left"></i>
-                Volver al inicio
+                <p>Volver al inicio</p>
             </a>
             
             <form class="auth-form" action="../Controler/registro_Ctrl.php" method="POST" accept-charset="utf-8">
                 <h1>Crear cuenta</h1>
                 <p class="subtitle">Únete a miles de personas que ya están transformando sus finanzas</p>
-                
-                <!-- Mensajes de respuesta del servidor -->
-                <div id="mensajes">
-                    <script>
-                        const urlParams = new URLSearchParams(window.location.search);
-                        const mensaje = urlParams.get('mensaje');
-                        const mensajesDiv = document.getElementById('mensajes');
-                        
-                        if (mensaje) {
-                            let alertClass, alertMessage;
-                            
-                            switch(mensaje) {
-                                case 'ingreso':
-                                    alertClass = 'alert-success';
-                                    alertMessage = 'Se registraron los datos correctamente. Redirigiendo...';
-                                    setTimeout(() => {
-                                        window.location.href = '../View/Inicio_Sesion.php';
-                                    }, 2000);
-                                    break;
-                                case 'noingreso':
-                                    alertClass = 'alert-danger';
-                                    alertMessage = 'No se pudo registrar el usuario, verifique los datos';
-                                    break;
-                                case 'correoeexiste':
-                                    alertClass = 'alert-danger';
-                                    alertMessage = 'El correo electrónico ya está registrado';
-                                    break;
-                                default:
-                                    alertClass = '';
-                                    alertMessage = '';
-                            }
-                            
-                            if (alertMessage) {
-                                mensajesDiv.innerHTML = `<div class="alert ${alertClass}">${alertMessage}</div>`;
-                            }
-                        }
-                    </script>
                 </div>
                 
                 <div class="form-row">
@@ -112,7 +75,7 @@
                 </div>
                 
                 <div class="auth-footer">
-                    ¿Ya tienes cuenta? <a href="../View/Inicio_Sesion.html">Inicia sesión aquí</a>
+                    ¿Ya tienes cuenta? <a href="./Inicio_Sesion.html">Inicia sesión aquí</a>
                 </div>
             </form>
         </section>
@@ -123,45 +86,5 @@
             <p>Únete a nuestra comunidad y descubre cómo pequeños cambios en tus hábitos pueden generar grandes resultados en tus finanzas personales.</p>
         </section>
     </section>
-    
-    <!-- Script mínimo para validación básica -->
-    <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-            const contrasena = document.querySelector('input[name="contrasena"]').value;
-            const confirmarContrasena = document.querySelector('input[name="confirmar_contrasena"]').value;
-            
-            if (contrasena !== confirmarContrasena) {
-                e.preventDefault();
-                alert('Las contraseñas no coinciden');
-                return false;
-            }
-        });
-
-        // Validación en tiempo real para números en teléfono
-        document.querySelector('input[name="telefono"]').addEventListener('input', function(e) {
-            this.value = this.value.replace(/[^0-9]/g, '');
-        });
-    </script>
-
-    <style>
-        .alert {
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-    </style>
 </body>
 </html>

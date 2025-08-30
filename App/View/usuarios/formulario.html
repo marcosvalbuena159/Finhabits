@@ -240,32 +240,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        document.getElementById('personalForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validación básica
-            const requiredFields = this.querySelectorAll('[required]');
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.classList.add('error');
-                    isValid = false;
-                } else {
-                    field.classList.remove('error');
-                }
-            });
-            
-            if (isValid) {
-                alert('Información guardada exitosamente. Será redirigido al panel principal.');
-                // Aquí iría la lógica para enviar los datos al servidor
-                window.location.href = 'home.html';
-            } else {
-                alert('Por favor complete todos los campos obligatorios marcados con *');
-            }
-        });
-    </script>
 </body>
 </html>
