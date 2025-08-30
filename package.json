@@ -1,0 +1,30 @@
+{
+  "name": "finhabits",
+  "version": "1.0.0",
+  "description": "Proyecto SENA",
+  "main": "index.js",
+  "scripts": {
+    "start": "node Index.js",
+    "dev": "nodemon Index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcosvalbuena159/Finhabits.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcosvalbuena159/Finhabits/issues"
+  },
+  "homepage": "https://github.com/marcosvalbuena159/Finhabits#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
+
+
+
