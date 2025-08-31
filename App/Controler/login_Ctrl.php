@@ -40,7 +40,6 @@ if(isset($_POST) && !empty($_POST))
             $_SESSION['sesion_iniciada'] = true;
             $_SESSION['ultimo_acceso'] = time();
 
-            // Registrar sesión en la base de datos
             $objLogin->registrarSesion($idUsuario);
         }
         header('location: ../view/usuarios/formulario.html?mensaje=loginexitoso');
