@@ -1,2 +1,2 @@
-# Finhabits
-Proyecto Sena
+# FinHabits - Guia Financiera y control de gastos.
+Proyecto SENA

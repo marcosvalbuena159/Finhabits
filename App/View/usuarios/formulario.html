@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinHabits | Datos Personales</title>
-    <link rel="stylesheet" href="../../../Public/Css/Index.css">
-    <link rel="stylesheet" href="../../../Public/Css/formulario.css">
+    <link rel="stylesheet" href="Public/Css/Index.css">
+    <link rel="stylesheet" href="Public/Css/formulario.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 </head>
 <body>
@@ -240,32 +240,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        document.getElementById('personalForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validación básica
-            const requiredFields = this.querySelectorAll('[required]');
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.classList.add('error');
-                    isValid = false;
-                } else {
-                    field.classList.remove('error');
-                }
-            });
-            
-            if (isValid) {
-                alert('Información guardada exitosamente. Será redirigido al panel principal.');
-                // Aquí iría la lógica para enviar los datos al servidor
-                window.location.href = 'home.html';
-            } else {
-                alert('Por favor complete todos los campos obligatorios marcados con *');
-            }
-        });
-    </script>
 </body>
 </html>
