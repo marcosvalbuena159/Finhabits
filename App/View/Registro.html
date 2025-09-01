@@ -11,22 +11,22 @@
 <body>
     <section class="container">
         <section class="izquierda">
-            <a href="./home" class="back-home">
+            <a href="home" class="back-home">
                 <i class="fas fa-arrow-left"></i>
                 <p>Volver al inicio</p>
             </a>
             
-            <form class="auth-form" method="POST" accept-charset="utf-8">
+            <form class="auth-form" form action="/usuarios/registro" method="POST" accept-charset="utf-8">
                 <h1>Crear cuenta</h1>
                 <p class="subtitle">Únete a miles de personas que ya están transformando sus finanzas</p>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <input type="text" name="nombre" placeholder="Nombre" required minlength="2" pattern="[A-Za-zÁáÉéÍíÓóÚúÑñ ]{2,50}">
+                        <input type="text" name="nombre" placeholder="Nombre" required minlength="2">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="apellido" placeholder="Apellido" required minlength="2" pattern="[A-Za-zÁáÉéÍíÓóÚúÑñ ]{2,50}">
+                        <input type="text" name="apellido" placeholder="Apellido" required minlength="2">
                     </div>
                 </div>
                 
@@ -44,7 +44,7 @@
                         <input type="password" name="contrasena" placeholder="Contraseña" required minlength="6">
                     </div>
                     <div class="form-group">
-                        <input type="password" name="confirmar_contrasena" placeholder="Confirmar contraseña" required minlength="8">
+                        <input type="password" name="confirmarContrasena" placeholder="Confirmar contraseña" required minlength="6">
                     </div>
                 </div>
                 
@@ -75,7 +75,7 @@
                 </div>
                 
                 <div class="auth-footer">
-                    ¿Ya tienes cuenta? <a href="./login">Inicia sesión aquí</a>
+                    ¿Ya tienes cuenta? <a href="Inicio_Sesion">Inicia sesión aquí</a>
                 </div>
             </form>
         </section>
