@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinHabits | Transforma tu Futuro Financiero</title>
     <link rel="stylesheet" href="../../../public/Css/Index.css">
     <link rel="stylesheet" href="../../../public/Css/Perfil.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
 </head>
+
 <body>
-<header class="header">
+    <header class="header">
         <nav class="nav container">
             <div class="nav__logo">
-                <img src="/Img/logo1.png ">
+                <img src="../../img/logo1.png ">
                 <span>FinHabits</span>
             </div>
             <ul class="nav__menu">
@@ -87,25 +90,30 @@
                     <div class="card-header">
                         <h2 class="card-title">
                             <i class="fas fa-chart-line card-icon"></i>
-                            Inversiones
+                            Balance Diario
                         </h2>
-                        <button class="card-action">Invertir Más</button>
+                        <button class="card-action" onclick="window.location.href='ingreso_gasto.html'">Agregar
+                            Gastos/Ingresos</button>
+                        <button class="card-action" onclick="window.location.href='inversiones.html'">Agregar
+                            Inversiones</button>
+                        <button class="card-action" onclick="window.location.href='gestion_trasacciones.html'">Gestionar
+                            Trasacciones</button>
                     </div>
                     <div class="investment-grid">
                         <div class="investment-item">
-                            <div class="investment-name">Acciones</div>
+                            <div class="investment-name">Ingresos</div>
                             <div class="investment-value">$3,200</div>
                         </div>
                         <div class="investment-item">
-                            <div class="investment-name">Bonos</div>
+                            <div class="investment-name">Gatos</div>
                             <div class="investment-value">$2,150</div>
                         </div>
                         <div class="investment-item">
-                            <div class="investment-name">Crypto</div>
+                            <div class="investment-name">Inversiones</div>
                             <div class="investment-value">$1,800</div>
                         </div>
                         <div class="investment-item">
-                            <div class="investment-name">Fondos</div>
+                            <div class="investment-name">Trasacciones</div>
                             <div class="investment-value">$1,800</div>
                         </div>
                     </div>
@@ -116,7 +124,7 @@
                             <i class="fas fa-bullseye card-icon"></i>
                             Mis Metas
                         </h2>
-                        <button class="card-action">Nueva Meta</button>
+                        <button class="card-action" href="gestion_metas.html">Gestionar Meta</button>
                     </div>
                     <div class="goals-list">
                         <div class="goal-item">
@@ -188,14 +196,14 @@
                         <div class="balance-item">
                             <div class="balance-left">
                                 <div class="balance-value">$8,950</div>
-                                <div class="balance-label">Inversiones</div>
+                                <div class="balance-label">Ahorros</div>
                             </div>
                             <div class="balance-change positive">+12.5% este mes</div>
                         </div>
                         <div class="balance-item">
                             <div class="balance-left">
                                 <div class="balance-value">$2,100</div>
-                                <div class="balance-label">Ahorros</div>
+                                <div class="balance-label">Fondos</div>
                             </div>
                             <div class="balance-change positive">+$500 este mes</div>
                         </div>
@@ -231,62 +239,63 @@
         </div>
     </div>
     <footer class="footer">
-                <div class="footer-container">
-                    <div class="footer-top">
-                        <div class="footer-section">
-                            <h3>Nosotros</h3>
-                            <ul>
-                                <li><a href="#">Empresa</a></li>
-                                <li><a href="#">Noticias</a></li>
-                                <li><a href="#">Impacto y Testimonios</a></li>
-                                <li><a href="#">Trabaja con Nosotros</a></li>
-                            </ul>
-                        </div>
-                        <div class="footer-section">
-                            <h3>Ayuda</h3>
-                            <ul>
-                                <li><a href="#">Centro de Ayuda</a></li>
-                                <li><a href="#">Comentarios</a></li>
-                                <li><a href="#">Soporte Tecnico</a></li>
-                                <li><a href="#">Recomendaciones</a></li>
-                            </ul>
-                        </div>
-        
-                        <div class="footer-section">
-                            <h3>Comienza</h3>
-                            <ul>
-                                <li><a href="#">Calculadora Financiera</a></li>
-                                <li><a href="#">Historial Financiero</a></li>
-                                <li><a href="#">Analisis y Graficos</a></li>
-                                <li><a href="#">Metas Financieras</a></li>
-                            </ul>
-                        </div>
-        
-                        <div class="footer-section social-section">
-                            <h3>Siguenos</h3>
-                            <div class="social-icons">
-                                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
-                                <a href="#" class="social-icon"><i class="fa-solid fa-x"></i></a>
-                                <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="footer-bottom">
-                        <div class="footer-legal">
-                            <a href="#">Política de Privacidad</a>
-                            <a href="#">Términos de Servicio</a>
-                            <a href="#">Código de Conducta</a>
-                            <a href="#">Soporte</a>
-                        </div>
-        
-                        <div class="copyright">
-                            © 2025 Finhabits. Todos los derechos reservados.
-                        </div>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-section">
+                    <h3>Nosotros</h3>
+                    <ul>
+                        <li><a href="#">Empresa</a></li>
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Impacto y Testimonios</a></li>
+                        <li><a href="#">Trabaja con Nosotros</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ayuda</h3>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Comentarios</a></li>
+                        <li><a href="#">Soporte Tecnico</a></li>
+                        <li><a href="#">Recomendaciones</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Comienza</h3>
+                    <ul>
+                        <li><a href="#">Calculadora Financiera</a></li>
+                        <li><a href="#">Historial Financiero</a></li>
+                        <li><a href="#">Analisis y Graficos</a></li>
+                        <li><a href="#">Metas Financieras</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section social-section">
+                    <h3>Siguenos</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-solid fa-x"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
                     </div>
                 </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos de Servicio</a>
+                    <a href="#">Código de Conducta</a>
+                    <a href="#">Soporte</a>
+                </div>
+
+                <div class="copyright">
+                    © 2025 Finhabits. Todos los derechos reservados.
+                </div>
+            </div>
+        </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 </body>
+
 </html>

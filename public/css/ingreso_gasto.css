@@ -1,41 +1,27 @@
 
 .registro-section {
-    min-height: 100vh;
-    padding-top: 120px;
+    min-height: 50vh;
+    padding-top: 50px;
     padding-bottom: 60px;
-    background: linear-gradient(rgba(17, 46, 84, 0.493), rgba(17, 46, 84, 0.493)), url(https://cdn.shortpixel.ai/spai/w_898+q_lossy+ret_img/https://www.eude.co/wp-content/uploads/sites/5/2021/01/Dise%C3%B1o-sin-t%C3%ADtulo-2021-01-27T132931.961-820x450.png);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
-
-.registro-title {
-    text-align: center;
-    font-size: 3rem;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 3rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    letter-spacing: 1px;
-}
-
 .registro-container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 25px;
     display: flex;
-    gap: 3rem;
+    gap: 5rem;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .registro-card {
-    background: rgba(17, 46, 84, 0.95);
+    background: #112e54;
     border-radius: 20px;
     padding: 2.5rem;
     min-width: 350px;
-    max-width: 400px;
+    max-width: 500px;
     border: 3px solid #000000;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
@@ -109,72 +95,6 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Sección de resumen */
-.resumen-section {
-    max-width: 800px;
-    margin: 4rem auto 0;
-    padding: 0 25px;
-}
-
-.resumen-card {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    padding: 2rem;
-    border: 2px solid #112e54;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-.resumen-card h3 {
-    text-align: center;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #112e54;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.resumen-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.resumen-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem;
-    background-color: #f1f7ff;
-    border-radius: 8px;
-    border: 1px solid #e0edff;
-}
-
-.resumen-item.balance {
-    background-color: #e0edff;
-    border: 2px solid #112e54;
-    font-weight: 700;
-}
-
-.resumen-label {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #112e54;
-}
-
-.resumen-valor {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #112e54;
-}
-
-.resumen-valor.ingresos {
-    color: #28a745;
-}
-
-.resumen-valor.gastos {
-    color: #dc3545;
-}
 
 /* Responsive */
 @media (max-width: 768px) {
