@@ -1,16 +1,51 @@
-/* Estilos específicos para el formulario de datos personales */
-
-.form-main {
-    min-height: 100vh;
-    background-image: linear-gradient(rgba(17, 46, 84, 0.493), rgba(17, 46, 84, 0.493)), url(https://cdn.shortpixel.ai/spai/w_898+q_lossy+ret_img/https://www.eude.co/wp-content/uploads/sites/5/2021/01/Dise%C3%B1o-sin-t%C3%ADtulo-2021-01-27T132931.961-820x450.png);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    padding-top: 100px;
-    padding-bottom: 2rem;
+.form-title-outside {
+    text-align: center;
+    font-weight: 900;
+    margin: 3rem 0 6rem;
+    font-size: 4rem;
+    color: #ffffff;
+    margin-bottom: 3rem;
+    text-shadow: 2px 2px 4px #000000;
 }
 
+.form-steps {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.step {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    color: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 2 solid #000000;
+}
+
+.step.active {
+    background-color: #e0edff;
+    color: #112e54;
+    border: 2 solid #000000;
+}
+.form-main {
+    margin-bottom: 4rem; 
+}
+
+
+.form-section {
+    display: none;
+}
+
+.form-section.active {
+    display: block;
+}
 .form-container {
     max-width: 1500px;
     margin: 0 auto;
@@ -35,10 +70,10 @@
 }
 
 .form-subtitle {
-    font-size: 1.1rem;
+    font-size: 1.7rem;
     color: #e0edff;
     margin-bottom: 0;
-    max-width: 600px;
+    max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -178,11 +213,11 @@
 .btn-primary {
     background-color: #112e54;
     color: #ffffff;
-    border: 2px solid #112e54;
+    border: 2px solid #000000;
 }
 
 .btn-primary:hover {
-    background-color: #0d2440;
+    background-color: #2a4f80;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(17, 46, 84, 0.3);
 }
@@ -202,6 +237,76 @@
 /* Animaciones y efectos */
 .form-section {
     animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-main {
+        padding-top: 80px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .form-container {
+        padding: 1.5rem;
+    }
+    
+    .form-title {
+        font-size: 2rem;
+    }
+    
+    .form-subtitle {
+        font-size: 1rem;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        margin: 0 0.5rem;
+        padding: 1rem;
+    }
+    
+    .form-section {
+        padding: 1.5rem;
+    }
+    
+    .form-title {
+        font-size: 1.75rem;
+    }
+    
+    .section-title {
+        font-size: 1.25rem;
+    }
 }
 
 /* Estados de validación mejorados */
@@ -233,71 +338,4 @@
 .btn-primary:disabled:hover {
     box-shadow: none;
     transform: none;
-}
-
-/* 🔹 Estilos del menú de usuario */
-.user-menu {
-    position: relative;
-}
-
-.user-icon {
-    font-size: 1.8rem;
-    color: #112e54;
-    cursor: pointer;
-    padding: 0.5rem;
-}
-
-.user-menu .dropdown {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 40px;
-    background: #f1f7ff;
-    border: 1px solid #112e54;
-    border-radius: 6px;
-    list-style: none;
-    padding: 0.5rem 0;
-    min-width: 150px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    z-index: 2000;
-}
-
-.user-menu .dropdown li {
-    text-align: left;
-}
-
-.user-menu .dropdown-link {
-    display: block;
-    padding: 0.7rem 1rem;
-    text-decoration: none;
-    color: #112e54;
-    font-weight: 600;
-    transition: background 0.3s ease;
-}
-
-.user-menu .dropdown-link:hover {
-    background: #e0edff;
-    color: #000;
-}
-
-.user-menu.active .dropdown {
-    display: block;
-}
-
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #f1f7ff;
-    z-index: 1000;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    border-bottom: 2px solid #112e54;
-}
-
-main {
-    margin-top: 80px; /* para que no se tape el formulario con el header */
 }
