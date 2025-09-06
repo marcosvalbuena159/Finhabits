@@ -16,7 +16,6 @@ app.use(express.json());
 
 //Importamos la conexion a la base de datos
 const conexion = require("./db/conexion");
-const { log } = require("console");
 
 //Configuracion de la session
 app.use(session({
