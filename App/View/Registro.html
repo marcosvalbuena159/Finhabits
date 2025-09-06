@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinHabits | Registro</title>
     <link rel="stylesheet" href="/Css/Index.css">
+    <link rel="stylesheet" href="/Css/Registro.css">
     <link rel="stylesheet" href="/Css/loginYRegistro.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 </head>
+
 <body>
     <section class="container">
         <section class="izquierda">
@@ -15,50 +18,75 @@
                 <i class="fas fa-arrow-left"></i>
                 <p>Volver al inicio</p>
             </a>
-            
-            <form class="auth-form" form action="/usuarios/registro" method="POST" accept-charset="utf-8">
+
+            <!-- Área de alertas -->
+            <div id="alertContainer"></div>
+
+            <form class="auth-form" id="registerForm" action="/usuarios/registro" method="POST" accept-charset="utf-8">
                 <h1>Crear cuenta</h1>
                 <p class="subtitle">Únete a miles de personas que ya están transformando sus finanzas</p>
-                </div>
-                
+
                 <div class="form-row">
-                    <div class="form-group">
-                        <input type="text" name="nombre" placeholder="Nombre" required minlength="2">
+                    <div class="form-group" id="nameGroup">
+                        <input type="text" name="nombre" id="nombre" placeholder="Nombre" required minlength="2">
+                        <div class="field-error" id="nameError" style="display: none;"></div>
                     </div>
-                    <div class="form-group">
-                        <input type="text" name="apellido" placeholder="Apellido" required minlength="2">
+                    <div class="form-group" id="lastNameGroup">
+                        <input type="text" name="apellido" id="apellido" placeholder="Apellido" required minlength="2">
+                        <div class="field-error" id="lastNameError" style="display: none;"></div>
                     </div>
                 </div>
-                
+
                 <div class="form-row">
-                    <div class="form-group">
-                        <input type="email" name="correo" placeholder="Correo Electrónico" required>
+                    <div class="form-group" id="emailGroup">
+                        <input type="email" name="correo" id="correo" placeholder="Correo Electrónico" required>
+                        <div class="field-error" id="emailError" style="display: none;"></div>
+                        <div class="field-success" id="emailSuccess" style="display: none;"></div>
                     </div>
-                    <div class="form-group">
-                        <input type="tel" name="telefono" placeholder="Teléfono" required pattern="[0-9]{10}" title="Ingrese exactamente 10 dígitos">
+                    <div class="form-group" id="phoneGroup">
+                        <input type="tel" name="telefono" id="telefono" placeholder="Teléfono" required pattern="[0-9]{10}"
+                            title="Ingrese exactamente 10 dígitos">
+                        <div class="field-error" id="phoneError" style="display: none;"></div>
                     </div>
                 </div>
-                
+
                 <div class="form-row">
-                    <div class="form-group">
-                        <input type="password" name="contrasena" placeholder="Contraseña" required minlength="6">
+                    <div class="form-group password-field" id="passwordGroup">
+                        <input type="password" id="passwordInput1" name="contrasena" placeholder="Contraseña" required
+                            minlength="6">
+                        <button type="button" class="toggle-password" data-target="passwordInput1" data-icon="toggleIcon1">
+                            <i class="fas fa-eye" id="toggleIcon1"></i>
+                        </button>
+                        <div class="password-strength" id="passwordStrength" style="display: none;">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strengthFill"></div>
+                            </div>
+                            <div class="strength-text" id="strengthText"></div>
+                        </div>
+                        <div class="field-error" id="passwordError" style="display: none;"></div>
                     </div>
-                    <div class="form-group">
-                        <input type="password" name="confirmarContrasena" placeholder="Confirmar contraseña" required minlength="6">
+                    <div class="form-group password-field" id="confirmPasswordGroup">
+                        <input type="password" id="passwordInput2" name="confirmarContrasena"
+                            placeholder="Confirmar contraseña" required minlength="6">
+                        <button type="button" class="toggle-password" data-target="passwordInput2" data-icon="toggleIcon2">
+                            <i class="fas fa-eye" id="toggleIcon2"></i>
+                        </button>
+                        <div class="field-error" id="confirmPasswordError" style="display: none;"></div>
+                        <div class="field-success" id="confirmPasswordSuccess" style="display: none;"></div>
                     </div>
                 </div>
-                
+
                 <div class="checkbox-group">
                     <input type="checkbox" id="terminos" name="terminos" required>
                     <label for="terminos">
-                        Acepto los <a href="#">Términos y Condiciones</a> y la <a href="#">Política de Privacidad</a>
+                        Acepto los <a href="#" target="_blank">Términos y Condiciones</a> y la <a href="#" target="_blank">Política de Privacidad</a>
                     </label>
                 </div>
-                
-                <button type="submit" class="btn-primary">
+
+                <button type="submit" class="btn-primary" id="submitBtn">
                     Crear cuenta
                 </button>
-                
+
                 <div class="divider">
                     <span>o regístrate con</span>
                 </div>
@@ -73,18 +101,39 @@
                         Continuar con Apple
                     </button>
                 </div>
-                
+
                 <div class="auth-footer">
-                    ¿Ya tienes cuenta? <a href="Inicio_Sesion">Inicia sesión aquí</a>
+                    ¿Ya tienes cuenta? <a href="./Inicio_Sesion">Inicia sesión aquí</a>
                 </div>
             </form>
         </section>
-        
+
         <section class="derecha">
             <div class="logo">FinHabits</div>
             <h2>Transforma tu futuro financiero</h2>
-            <p>Únete a nuestra comunidad y descubre cómo pequeños cambios en tus hábitos pueden generar grandes resultados en tus finanzas personales.</p>
+            <p>Únete a nuestra comunidad y descubre cómo pequeños cambios en tus hábitos pueden generar grandes
+                resultados en tus finanzas personales.</p>
         </section>
     </section>
+    <script>
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', () => {
+                const input = button.previousElementSibling; // el input está justo antes del botón
+                const icon = button.querySelector('i');
+
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        });
+    </script>
+
 </body>
+
 </html>
