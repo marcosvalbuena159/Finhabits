@@ -1,59 +1,70 @@
-// Importar express
+// Importamos variales y frameworks necesarios
+require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 const path = require("path");
-const conexion = require("./App/Db/Conexion"); //Exportamos la conexion
-const registroRoutes = require("./App/Controller/Registro");
-const loginRoutes = require("./App/Controller/Login");
-const app = express();
-const PORT = process.env.PORT || 3000;
+const session = require("express-session");
+const usuarios = require("./routes/usuarios");
 
-// Middleware para procesar datos del body
-app.use(express.urlencoded({ extended: true }));
+const app = express();
+const port = process.env.PORT || 3000; // Definimos el puerto
+
+//Permitimos conexion entre back y front
+app.use(express.urlencoded({ extended: true })); //leer formularios HTML
+app.use(cors());
 app.use(express.json());
 
-// Ruta principal
+//Importamos la conexion a la base de datos
+const conexion = require("./db/conexion");
+const { log } = require("console");
+
+//Configuracion de la session
+app.use(session({
+    secret: "210424*#$Finhabits", 
+    resave: false,
+    saveUninitialized: false,
+}));
+
+//Rutas de usuario
+app.use("/", usuarios);
+
+//Aceptamos archivos estaticos
+app.use(express.static("public"));
+
+//Importamos las rutas
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "App", "View", "Index.html"));
+  res.sendFile(path.join(__dirname, "public", "view", "index.html"));
 });
 
-// Archivos estaticos
-app.use(express.static('Public'));
-
-//rutas adicionales
 app.get("/home", (req, res) => {
-  res.sendFile(path.join(__dirname, "App", "View", "home.html"));
-});
-
-app.get("/Registro", (req, res) => {
-  res.sendFile(path.join(__dirname, "App", "View", "Registro.html"));
-});
-
-app.get("/Inicio_Sesion", (req, res) => {
-  res.sendFile(path.join(__dirname, "App", "View", "Inicio_Sesion.html"));
-});
-
-app.get("/Noticias", (req, res) => {
-  res.sendFile(path.join(__dirname, "App", "View", "Noticias.html"));
-});
-
-app.get("/Nosotros", (req, res) => {
-  res.sendFile(path.join(__dirname, "App", "View", "Nosotros.html"));
+  res.sendFile(path.join(__dirname, "public", "view", "home.html"));
 });
 
 app.get("/finanzas", (req, res) => {
-  res.sendFile(path.join(__dirname, "App", "View", "finanzas.html"));
+  res.sendFile(path.join(__dirname, "public", "view", "finanzas.html"));
 });
 
 app.get("/Ayuda", (req, res) => {
-  res.sendFile(path.join(__dirname, "App", "View", "Ayuda.html"));
+  res.sendFile(path.join(__dirname, "public", "view", "Ayuda.html"));
 });
 
-// Rutas de usuarios
-app.use('/usuarios', registroRoutes); 
-app.use('/usuarios', loginRoutes);   
+app.get("/Nosotros", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "view", "Nosotros.html"));
+});
 
+app.get("/Noticias", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "view", "Noticias.html"));
+});
 
-// Levantar servidor
-app.listen(PORT, () => {
-  console.log('Servidor corriendo en http://localhost:3000');
+app.get("/Registro", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "view", "Registro.html"));
+});
+
+app.get("/Inicio_Sesion", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "view", "Inicio_Sesion.html"));
+});
+
+//Iniciamos el servidor
+app.listen(port, () => {    
+    console.log('Servidor corriendo en el puerto ' + port);
 });
