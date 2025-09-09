@@ -1,0 +1,123 @@
+.main-content {
+    padding-top: 120px;
+    padding-bottom: 60px;
+    min-height: 100vh;
+}
+
+.metas-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.metas-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.metas-title {
+    font-size: 4rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-top: 40px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    letter-spacing: 2px;
+}
+
+.metas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #112e54;
+    border: 3px solid #000000;
+    border-radius: 20px;
+    padding: 25px 35px;
+}
+
+.meta-card {
+    background: #f1f7ff;
+    border: 3px solid #000000;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.meta-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    background: #e0edff;
+}
+
+.meta-card h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #112e54;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+}
+
+.meta-icon {
+    font-size: 3rem;
+    color: #112e54;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.meta-card:hover .meta-icon {
+    color: #112e54;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .nav__menu {
+        display: none;
+    }
+
+    .metas-title {
+        font-size: 2.8rem;
+    }
+
+    .metas-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 400px;
+    }
+
+    .meta-card {
+        padding: 30px 25px;
+    }
+
+    .meta-card h2 {
+        font-size: 1.6rem;
+    }
+
+    .meta-icon {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .metas-container {
+        padding: 0 15px;
+    }
+
+    .metas-title {
+        font-size: 2.2rem;
+    }
+
+    .meta-card {
+        padding: 25px 20px;
+    }
+
+    .meta-card h2 {
+        font-size: 1.4rem;
+    }
+}

@@ -3,10 +3,10 @@
     border-radius: 24px;
     border: 2px solid #000000;
     padding: 30px;
-    margin-bottom: 40px; /* Más espacio abajo */
+    margin-bottom: 20px; 
     display: grid;
     grid-template-columns: auto 1fr auto;
-    gap: 30px;
+    gap: 10px;
     align-items: start;
     position: relative;
     overflow: hidden;
@@ -394,6 +394,7 @@
     background: #f1f7ff;
     color: #112e54;
     transform: translateY(-3px);
+    box-shadow: 0 5px 15px #e0edff;
 }
 
 .quick-action i {

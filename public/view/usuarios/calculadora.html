@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinHabits | Calculadora Financiera</title>
+        <link rel="stylesheet" href="../../../public/Css/Index.css">
+    <link rel="stylesheet" href="../../../public/Css/calculadora.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
+</head>
+
+<body>
+    <header class="header">
+        <nav class="nav container">
+
+            
+            <div class="nav__logo">
+                <img src="../../Img/logo1.png">
+                <span>Finhabits</span>
+            </div>
+            <ul class="nav__menu">
+                <li class="nav__item">
+                    <a href="calculadora" class="nav__link">Calculadora</a>
+                </li>
+                <li class="nav__item">
+                    <a href="historial" class="nav__link">Historial</a>
+                </li>
+                <li class="nav__item">
+                    <a href="graficos" class="nav__link">Graficos</a>
+                </li>
+                <li class="nav__item">
+                    <a href="reportes" class="nav__link">Reportes</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="calculadora-header">
+            <h1 class="calculadora-title">CALCULADORA FINANCIERA</h1>
+        </div>
+
+        <div class="calculadora-container">
+            <div class="calculadora-left">
+                <!-- Ingresos -->
+                <div class="calculadora-card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            Agregar Ingreso
+                        </h2>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="ingresoMonto" class="input-field" placeholder="Cantidad" step="0.01" min="0">
+                        <select id="ingresoProcedencia" class="input-field">
+                            <option value="">Procedencia</option>
+                            <option value="salario">Salario</option>
+                            <option value="freelance">Trabajo Freelance</option>
+                            <option value="negocio">Negocio Propio</option>
+                            <option value="inversion">Inversiones</option>
+                            <option value="regalo">Regalo/Bono</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <button class="btn-agregar" onclick="agregarIngreso()">Agregar Ingreso</button>
+                </div>
+
+                <!-- Gastos -->
+                <div class="calculadora-card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            Agregar Gasto
+                        </h2>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="gastoMonto" class="input-field" placeholder="Cantidad" step="0.01" min="0">
+                        <select id="gastoProcedencia" class="input-field">
+                            <option value="">Procedencia</option>
+                            <option value="alimentacion">Alimentación</option>
+                            <option value="transporte">Transporte</option>
+                            <option value="vivienda">Vivienda</option>
+                            <option value="salud">Salud</option>
+                            <option value="educacion">Educación</option>
+                            <option value="entretenimiento">Entretenimiento</option>
+                            <option value="ropa">Ropa y Accesorios</option>
+                            <option value="servicios">Servicios Públicos</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <button class="btn-agregar" onclick="agregarGasto()">Agregar Gasto</button>
+                </div>
+
+                <!-- Deudas -->
+                <div class="calculadora-card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            Agregar Deuda
+                        </h2>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="deudaMonto" class="input-field" placeholder="Cantidad" step="0.01" min="0">
+                        <select id="deudaTipo" class="input-field">
+                            <option value="">Tipo de Deuda</option>
+                            <option value="tarjeta">Tarjeta de Crédito</option>
+                            <option value="prestamo">Préstamo Personal</option>
+                            <option value="hipoteca">Hipoteca</option>
+                            <option value="auto">Crédito Automotriz</option>
+                            <option value="estudiantil">Crédito Estudiantil</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <button class="btn-agregar" onclick="agregarDeuda()">Agregar Deuda</button>
+                </div>
+                <div class="calculadora-card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            Agregar Pago
+                        </h2>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="pagoMonto" class="input-field" placeholder="Cantidad" step="0.01" min="0">
+                        <select id="pagoTipo" class="input-field">
+                            <option value="">Tipo de Pago</option>
+                            <option value="deuda">Pago de Deuda</option>
+                            <option value="ahorro">Ahorro/Inversión</option>
+                            <option value="emergencia">Fondo de Emergencia</option>
+                            <option value="subscripcion">Suscripciones</option>
+                            <option value="seguro">Seguros</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <button class="btn-agregar" onclick="agregarPago()">Agregar Pago</button>
+                </div>
+            </div>
+
+            <div class="calculadora-right">
+                <div class="resultados-card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-chart-line card-icon"></i>
+                            Resultados Financieros
+                        </h2>
+                    </div>
+
+                    <div class="resultado-item">
+                        <div class="resultado-label">Total Ingresos</div>
+                        <div class="resultado-valor" id="totalIngresos">$0.00</div>
+                    </div>
+
+                    <div class="resultado-item">
+                        <div class="resultado-label">Total Gastos</div>
+                        <div class="resultado-valor" id="totalGastos">$0.00</div>
+                    </div>
+
+                    <div class="resultado-item">
+                        <div class="resultado-label">Total Deudas</div>
+                        <div class="resultado-valor" id="totalDeudas">$0.00</div>
+                    </div>
+
+                    <div class="resultado-item">
+                        <div class="resultado-label">Total Pagos</div>
+                        <div class="resultado-valor" id="totalPagos">$0.00</div>
+                    </div>
+
+                    <div class="resultado-item capacidad-ahorro">
+                        <div class="resultado-label">Capacidad de Ahorro</div>
+                        <div class="resultado-valor" id="capacidadAhorro">$0.00</div>
+                    </div>
+
+                    <button class="btn-calcular" onclick="calcularCapacidadAhorro()">
+                        <i class="fas fa-calculator"></i> CALCULAR
+                    </button>
+
+                    <div class="card-header" style="margin-top: 30px;">
+                        <h3 class="card-title">
+                            <i class="fas fa-history card-icon"></i>
+                            Historial Reciente
+                        </h3>
+                    </div>
+                    <div id="historial"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-section">
+                    <h3>Nosotros</h3>
+                    <ul>
+                        <li><a href="#">Empresa</a></li>
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Impacto y Testimonios</a></li>
+                        <li><a href="#">Trabaja con Nosotros</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ayuda</h3>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Comentarios</a></li>
+                        <li><a href="#">Soporte Técnico</a></li>
+                        <li><a href="#">Recomendaciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Comienza</h3>
+                    <ul>
+                        <li><a href="#">Calculadora Financiera</a></li>
+                        <li><a href="#">Historial Financiero</a></li>
+                        <li><a href="#">Análisis y Gráficos</a></li>
+                        <li><a href="#">Metas Financieras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section social-section">
+                    <h3>Síguenos</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-solid fa-x"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos de Servicio</a>
+                    <a href="#">Código de Conducta</a>
+                    <a href="#">Soporte</a>
+                </div>
+                <div class="copyright">
+                    © 2025 Finhabits. Todos los derechos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

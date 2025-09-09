@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinHabits | Registro de Ingresos y Gastos</title>
+<link rel="stylesheet" href="/Css/Index.css">
+    <link rel="stylesheet" href="/Css/formulario.css">
+    <link rel="stylesheet" href="/Css/ingreso_gasto.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+
+            
+            <div class="nav__logo">
+                <img src="../../Img/logo1.png">
+                <span>Finhabits</span>
+            </div>
+            <ul class="nav__menu">
+                <li class="nav__item">
+                    <a href="calculadora" class="nav__link">Calculadora</a>
+                </li>
+                <li class="nav__item">
+                    <a href="historial" class="nav__link">Historial</a>
+                </li>
+                <li class="nav__item">
+                    <a href="graficos" class="nav__link">Graficos</a>
+                </li>
+                <li class="nav__item">
+                    <a href="reportes" class="nav__link">Reportes</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-content">
+        <h1 class="form-title-outside">Registro de Trasacciones</h1>
+        <section class="registro-section">
+            <div class="registro-container">
+                <div class="registro-card ingresos-card">
+                    <form class="registro-form">
+                        <input type="number" placeholder="Nombre de la Trasaccion" class="input-field" step="0.01" min="0" required>
+                        <select class="input-field" required>
+                            <option value="">Categoria</option>
+                            <option value="salario">Salario</option>
+                            <option value="freelance">Trabajo Freelance</option>
+                            <option value="negocio">Negocio Propio</option>
+                            <option value="inversion">Inversiones</option>
+                            <option value="regalo">Regalo/Bono</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                        <input type="number" placeholder="Monto de la Trasaccion" class="input-field" step="0.01" min="0" required>
+                        <button type="submit" class="btn-agregar">Agregar Trasaccion</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-section">
+                    <h3>Nosotros</h3>
+                    <ul>
+                        <li><a href="#">Empresa</a></li>
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Impacto y Testimonios</a></li>
+                        <li><a href="#">Trabaja con Nosotros</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ayuda</h3>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Comentarios</a></li>
+                        <li><a href="#">Soporte Técnico</a></li>
+                        <li><a href="#">Recomendaciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Comienza</h3>
+                    <ul>
+                        <li><a href="#">Calculadora Financiera</a></li>
+                        <li><a href="#">Historial Financiero</a></li>
+                        <li><a href="#">Análisis y Gráficos</a></li>
+                        <li><a href="#">Metas Financieras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section social-section">
+                    <h3>Síguenos</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-solid fa-x"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos de Servicio</a>
+                    <a href="#">Código de Conducta</a>
+                    <a href="#">Soporte</a>
+                </div>
+                <div class="copyright">
+                    © 2025 Finhabits. Todos los derechos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

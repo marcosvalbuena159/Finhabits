@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinHabits | Registro de Ingresos y Gastos</title>
-    <link rel="stylesheet" href="/Css/Index.css">
-    <link rel="stylesheet" href="/Css/formulario.css">
-    <link rel="stylesheet" href="/Css/ingreso_gasto.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <title>FinHabits | Gestión de Metas</title>
+    <link rel="stylesheet" href="../../../public/Css/Index.css">
+    <link rel="stylesheet" href="../../../public/Css/gestion_metas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
 </head>
-
 <body>
     <header class="header">
         <nav class="nav container">
 
-
+            
             <div class="nav__logo">
                 <img src="../../Img/logo1.png">
                 <span>Finhabits</span>
@@ -38,48 +34,35 @@
             </ul>
         </nav>
     </header>
-    <main class="main-content">
-        <h1 class="form-title-outside">Registro de Ingresos y Gastos</h1>
-        <section class="registro-section">
-            <div class="registro-container">
-                <div class="registro-card ingresos-card">
-                    <h2>Ingresos</h2>
-                    <form class="registro-form">
-                        <input type="number" placeholder="Cantidad" class="input-field" step="0.01" min="0" required>
-                        <select class="input-field" required>
-                            <option value="">Procedencia</option>
-                            <option value="salario">Salario</option>
-                            <option value="freelance">Trabajo Freelance</option>
-                            <option value="negocio">Negocio Propio</option>
-                            <option value="inversion">Inversiones</option>
-                            <option value="regalo">Regalo/Bono</option>
-                            <option value="otro">Otro</option>
-                        </select>
-                        <button type="submit" class="btn-agregar">Agregar</button>
-                    </form>
-                </div>
 
-                <div class="registro-card gastos-card">
-                    <h2>Gastos</h2>
-                    <form class="registro-form">
-                        <input type="number" placeholder="Cantidad" class="input-field" step="0.01" min="0" required>
-                        <select class="input-field" required>
-                            <option value="">Procedencia</option>
-                            <option value="alimentacion">Alimentación</option>
-                            <option value="transporte">Transporte</option>
-                            <option value="vivienda">Vivienda</option>
-                            <option value="salud">Salud</option>
-                            <option value="educacion">Educación</option>
-                            <option value="entretenimiento">Entretenimiento</option>
-                            <option value="ropa">Ropa y Accesorios</option>
-                            <option value="servicios">Servicios Públicos</option>
-                            <option value="otro">Otro</option>
-                        </select>
-                        <button type="submit" class="btn-agregar">Agregar</button>
-                    </form>
+    <main class="main-content">
+        <div class="metas-container">
+            <div class="metas-header">
+                <h1 class="metas-title">GESTIÓN DE METAS</h1>
+            </div>
+
+            <div class="metas-grid">
+                <div class="meta-card" onclick="crearMeta()">
+                    <i class="fas fa-plus-circle meta-icon"></i>
+                    <h2>Crear</h2>
+                </div>
+                
+                <div class="meta-card" onclick="eliminarMeta()">
+                    <i class="fas fa-trash-alt meta-icon"></i>
+                    <h2>Eliminar</h2>
+                </div>
+                
+                <div class="meta-card" onclick="actualizarMeta()">
+                    <i class="fas fa-edit meta-icon"></i>
+                    <h2>Actualizar</h2>
+                </div>
+                
+                <div class="meta-card" onclick="visualizarMeta()">
+                    <i class="fas fa-eye meta-icon"></i>
+                    <h2>Visualizar</h2>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
     <footer class="footer">
@@ -136,5 +119,4 @@
         </div>
     </footer>
 </body>
-
 </html>
