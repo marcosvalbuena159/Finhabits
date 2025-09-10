@@ -420,3 +420,22 @@
 footer {
     margin-top: 60px;
 }
+.goal-action-btn {
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.goal-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.empty-goals {
+    text-align: center;
+    padding: 40px 20px;
+    background: #e0edff;
+    border-radius: 15px;
+    border: 2px solid #000000;
+}
