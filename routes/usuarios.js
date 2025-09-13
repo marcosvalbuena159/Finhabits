@@ -18,7 +18,7 @@ router.post("/registro", async (req, res) => {
         if(error) {
             console.err("Error al registrar el usuario: ", error);
         }
-            res.redirect("/view/Inicio_Sesion.html"); 
+            res.redirect("/view/usuarios/formulario.html"); 
     });
 });
 
@@ -46,7 +46,7 @@ router.post("/login", (req, res) => {
             nombre: usuario.nombre,
             correo: usuario.correo
         };
-        res.redirect("/view/usuarios/formulario.html");
+        res.redirect("/view/usuarios/perfil.html");
     });
 });
 

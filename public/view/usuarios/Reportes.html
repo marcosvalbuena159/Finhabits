@@ -5,41 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinHabits | Reportes</title>
-    <link rel="stylesheet" href="../../../public/Css/Index.css">
-    <link rel="stylesheet" href="../../../public/Css/formulario.css">
-    <link rel="stylesheet" href="../../../public/Css/reportes.css">
+    <link rel="stylesheet" href="/Css/Index.css">
+    <link rel="stylesheet" href="/Css/formulario.css">
+    <link rel="stylesheet" href="/Css/reportes.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
 </head>
 
 <body>
-    <header class="header">
-        <nav class="nav container">
-            <div class="nav__logo">
-                <img src="../../img/logo1.png">
-                <span>FinHabits</span>
-            </div>
-            <ul class="nav__menu">
-                <li class="nav__item">
-                    <a href="home" class="nav__link">Hogar</a>
-                </li>
-                <li class="nav__item">
-                    <a href="finanzas" class="nav__link">Finanzas</a>
-                </li>
-                <li class="nav__item">
-                    <a href="nosotros" class="nav__link">Nosotros</a>
-                </li>
-                <li class="nav__item">
-                    <a href="perfil" class="nav__link">Perfil</a>
-                </li>
-                <li class="nav__item">
-                    <a href="herramientas" class="nav__link">Herramientas</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
     <div class="report-container">
+        <a href="/perfil" class="back-home">
+                <i class="fas fa-arrow-left"></i>
+                <p>Volver al inicio</p>
+            </a>
         <h1 class="form-title-outside">Reporte</h1>
         <div class="filters-section">
             <div class="filters-container2">
@@ -47,10 +26,10 @@
                     <span class="filter2" placeholder="Filtros">Filtros</span>
                 </div>
                 <div class="filter-column">
-                    <input type="date1" id="fecha1" class="filter-input" placeholder="Fecha 1">
+                    <input type="date" id="fecha1" class="filter-input" placeholder="Fecha 1">
                 </div>
                 <div class="filter-column">
-                    <input type="date2" id="fecha2" class="filter-input" placeholder="Fecha 2">
+                    <input type="date" id="fecha2" class="filter-input" placeholder="Fecha 2">
                 </div>
                 <div class="filter-column">
                     <input type="number" id="cantidad" class="filter-input" placeholder="Cantidad">
@@ -64,6 +43,9 @@
                         <option>Inversiones</option>
                     </select>
                 </div>
+                <button class="implementar" onclick="implementar()">
+                    Implementar
+                </button>
             </div>
         </div>
 

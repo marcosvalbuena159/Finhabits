@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinHabits | Recuperar Contraseña</title>
+    <link rel="stylesheet" href="/Css/Index.css">
+    <link rel="stylesheet" href="/Css/loginYRegistro.css">
+    <link rel="stylesheet" href="/Css/Login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+</head>
+<body>
+    <section class="container">
+        <section class="izquierda">
+            <a href="home" class="back-home">
+                <i class="fas fa-arrow-left"></i>
+                Volver al inicio
+            </a>
+
+            <div id="alertContainer"></div>
+
+            <form class="auth-form" id="loginForm" action="/cambio_contrasena" method="POST" accept-charset="utf-8">
+                <h1 >Recuperación de Contraseña</h1>
+                <p class="subtitle">Ingresa tu correo electrónico o número de teléfono y te enviaremos un código para restablecer tu contraseña</p>
+<div class="form-group" id="emailGroup">
+                <input 
+                    type="text" 
+                    name="contacto" 
+                    id="contacto" 
+                    class="recovery-input"
+                    placeholder="Correo o Numero de Teléfono" 
+                    required
+                ></div>
+
+                <button type="submit" class="btn-primary" id="submitBtn">
+                    Enviar Código
+                </button>
+
+                <div class="auth-footer">
+                    ¿Recordaste tu contraseña? <a href="Inicio_Sesion">Iniciar sesión</a>
+                </div>
+            </form>
+        </section>
+
+        <section class="derecha">
+            <div class="logo">FinHabits</div>
+            <h2>Recupera tu acceso</h2>
+            <p>No te preocupes, es normal olvidar las contraseñas. Te ayudaremos a recuperar el acceso a tu cuenta de manera segura.</p>
+
+            <div class="features-list">
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Proceso 100% seguro</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Código válido por 15 minutos</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Verificación por SMS o email</span>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <script>
+        let currentStep = 1;
+
+        // Paso 1: Enviar código
+        document.getElementById('step1Form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const contacto = document.getElementById('contacto').value.trim();
+            const btn = document.getElementById('sendCodeBtn');
+            
+            if (!contacto) {
+                showAlert('Por favor ingresa tu correo o número de teléfono', 'danger');
+                return;
+            }
+
+            // Validar formato de email o teléfono
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phoneRegex = /^[0-9]{10}$/;
+            
+            if (!emailRegex.test(contacto) && !phoneRegex.test(contacto)) {
+                showAlert('Por favor ingresa un correo válido o un número de teléfono de 10 dígitos', 'danger');
+                return;
+            }
+
+            // Simular envío de código
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                showStep(2);
+                btn.innerHTML = 'Enviar Código';
+                btn.disabled = false;
+            }, 2000);
+        });
+
+        // Paso 2: Verificar código
+        document.getElementById('step2Form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const codigo = document.getElementById('codigo').value.trim();
+            const btn = document.getElementById('verifyCodeBtn');
+            
+            // Simular validación de código (en producción, enviarías esto al servidor)
+            if (codigo.length !== 6 || !/^[0-9]+$/.test(codigo)) {
+                document.getElementById('codigoError').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('codigoError').style.display = 'none';
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                showStep(3);
+                btn.innerHTML = 'Recuperar Contraseña';
+                btn.disabled = false;
+            }, 1500);
+        });
+
+        // Paso 3: Nueva contraseña
+        document.getElementById('step3Form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nuevaContrasena = document.getElementById('nuevaContrasena').value;
+            const confirmarContrasena = document.getElementById('confirmarContrasena').value;
+            const btn = document.getElementById('changePasswordBtn');
+            
+            // Validar fortaleza de contraseña
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            
+            if (!passwordRegex.test(nuevaContrasena)) {
+                document.getElementById('passwordStrengthError').style.display = 'block';
+                return;
+            }
+            
+            document.getElementById('passwordStrengthError').style.display = 'none';
+            
+            // Validar que las contraseñas coincidan
+            if (nuevaContrasena !== confirmarContrasena) {
+                document.getElementById('passwordMatchError').style.display = 'block';
+                return;
+            }
+            
+            document.getElementById('passwordMatchError').style.display = 'none';
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cambiando...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                showStep(4);
+                btn.innerHTML = 'Cambiar Contraseña';
+                btn.disabled = false;
+            }, 2000);
+        });
+
+        // Reenviar código
+        document.getElementById('resendCode').addEventListener('click', function(e) {
+            e.preventDefault();
+            showStep(1);
+        });
+
+        // Ir a login después del éxito
+        document.getElementById('goToLoginBtn').addEventListener('click', function() {
+            window.location.href = 'Inicio_Sesion';
+        });
+
+        // Funciones auxiliares
+        function showStep(step) {
+            // Ocultar todos los formularios
+            document.getElementById('step1Form').style.display = 'none';
+            document.getElementById('step2Form').style.display = 'none';
+            document.getElementById('step3Form').style.display = 'none';
+            document.getElementById('step4Success').style.display = 'none';
+            
+            // Mostrar el paso actual
+            document.getElementById('step' + step + (step === 4 ? 'Success' : 'Form')).style.display = 'block';
+            currentStep = step;
+        }
+
+        // Toggle password visibility
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                const icon = this.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        });
+
+        // Función para mostrar alertas
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            
+            alertContainer.innerHTML = '';
+            alertContainer.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        // Auto-detectar si es email o teléfono
+        document.getElementById('contacto').addEventListener('input', function(e) {
+            const value = e.target.value;
+            const emailRegex = /^[^\s@]+@/;
+            
+            if (emailRegex.test(value)) {
+                e.target.placeholder = 'Correo Electrónico';
+            } else if (/^[0-9]/.test(value)) {
+                e.target.placeholder = 'Número de Teléfono';
+            } else {
+                e.target.placeholder = 'Correo o Numero de Teléfono';
+            }
+        });
+
+        // Formatear código mientras se escribe
+        document.getElementById('codigo').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '').substring(0, 6);
+            e.target.value = value;
+        });
+    </script>
+</body>
+
+</html>

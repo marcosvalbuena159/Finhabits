@@ -18,7 +18,7 @@
             border-radius: 20px;
             padding: 25px;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr ;
+            grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
             gap: 20px;
             align-items: end;
             transition: all 0.3s ease;
@@ -29,7 +29,7 @@
             border-radius: 20px;
             padding: 25px;
             display: grid;
-            grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
             gap: 20px;
             align-items: end;
             transition: all 0.3s ease;
@@ -162,6 +162,29 @@
     margin-bottom: 30px;
     line-height: 1.4;
 }
+.implementar {
+    background: #366095;
+    color: #ffffff;
+    border: 3px solid #000000;
+    border-radius: 15px;
+    padding: 16px 40px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.implementar:hover {
+    background: #e0edff;
+    transform: translateY(-3px);
+    color: #112e54;
+    box-shadow: 0 10px 25px rgba(17, 46, 84, 0.4);
+}
+
 
 .download-btn {
     background: #112e54;

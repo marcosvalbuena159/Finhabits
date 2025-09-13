@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinHabits | Cambio de Contraseña</title>
+    <link rel="stylesheet" href="/Css/Index.css">
+    <link rel="stylesheet" href="/Css/loginYRegistro.css">
+    <link rel="stylesheet" href="/Css/Login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+    <style>
+        .change-password-container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 20px 40px #e0edff;
+        }
+
+        .change-password-left {
+            flex: 1;
+            padding: 40px;
+            background: #ffffff;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .change-password-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .change-password-title {
+            color: #112e54;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .change-password-subtitle {
+            color: #112e54;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .password-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 16px 50px 16px 16px;
+            border: 2px solid #112e54;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            color: #112e54;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #112e54;
+            box-shadow: 0 0 0 5px #e0edff;
+        }
+
+        .password-input::placeholder {
+            color: #112e54;
+            opacity: 0.7;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #112e54;
+            font-size: 18px;
+            padding: 5px;
+        }
+
+        .password-toggle:hover {
+            color: #1d3e6a;
+        }
+
+        .field-error {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .change-password-btn {
+            width: 100%;
+            padding: 18px;
+            background: #112e54;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .change-password-btn:hover {
+            background: #1d3e6a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(17, 46, 84, 0.3);
+        }
+
+        .change-password-btn:active {
+            transform: translateY(0);
+        }
+
+        .change-password-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .back-to-profile {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-to-profile a {
+            color: #112e54;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .back-to-profile a:hover {
+            text-decoration: underline;
+        }
+
+        .change-password-right {
+            flex: 1;
+            background: linear-gradient(135deg, #112e54 0%, #1d3e6a 50%, #2a4f80 100%);
+            padding: 60px 40px;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .change-password-right::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .change-password-logo {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .change-password-right h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+        }
+
+        .change-password-right p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .security-tips {
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .security-tip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+
+        .security-tip i {
+            margin-right: 15px;
+            font-size: 20px;
+            color: #3498db;
+        }
+
+        .password-strength {
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        .strength-bar {
+            width: 100%;
+            height: 4px;
+            background: #e0edff;
+            border-radius: 2px;
+            margin: 5px 0;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-weak { 
+            width: 25%; 
+            background: #dc3545; 
+        }
+
+        .strength-medium { 
+            width: 50%; 
+            background: #ffc107; 
+        }
+
+        .strength-strong { 
+            width: 75%; 
+            background: #28a745; 
+        }
+
+        .strength-very-strong { 
+            width: 100%; 
+            background: #007bff; 
+        }
+
+        @media (max-width: 768px) {
+            .change-password-container {
+                flex-direction: column;
+            }
+            
+            .change-password-right {
+                min-height: 300px;
+            }
+
+            .change-password-title {
+                font-size: 2rem;
+            }
+
+            .change-password-right h2 {
+                font-size: 2rem;
+            }
+
+            .change-password-logo {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="change-password-container">
+        <section class="change-password-left">
+            <a href="perfil" class="back-home">
+                <i class="fas fa-arrow-left"></i>
+                Volver al perfil
+            </a>
+
+            <div id="alertContainer"></div>
+
+            <form class="change-password-form" id="changePasswordForm">
+                <h1 class="change-password-title">Cambiar Contraseña</h1>
+                <p class="change-password-subtitle">Actualiza tu contraseña para mantener tu cuenta segura</p>
+
+                <div class="password-group">
+                    <input 
+                        type="password" 
+                        name="contrasenaActual" 
+                        id="contrasenaActual" 
+                        class="password-input"
+                        placeholder="Contraseña Actual" 
+                        required
+                    >
+                    <button type="button" class="password-toggle">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <div class="field-error" id="currentPasswordError">
+                        Contraseña actual incorrecta
+                    </div>
+                </div>
+
+                <div class="password-group">
+                    <input 
+                        type="password" 
+                        name="nuevaContrasena" 
+                        id="nuevaContrasena" 
+                        class="password-input"
+                        placeholder="Nueva Contraseña" 
+                        required
+                        minlength="8"
+                    >
+                    <button type="button" class="password-toggle">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <div class="password-strength" id="passwordStrength" style="display: none;">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <div class="strength-text" id="strengthText"></div>
+                    </div>
+                    <div class="field-error" id="newPasswordError">
+                        La contraseña debe tener mínimo 8 caracteres (mayúsculas, minúsculas, números y caracteres especiales)
+                    </div>
+                </div>
+
+                <div class="password-group">
+                    <input 
+                        type="password" 
+                        name="confirmarContrasena" 
+                        id="confirmarContrasena" 
+                        class="password-input"
+                        placeholder="Confirmar Nueva Contraseña" 
+                        required
+                    >
+                    <button type="button" class="password-toggle">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <div class="field-error" id="confirmPasswordError">
+                        Las contraseñas no coinciden
+                    </div>
+                </div>
+
+                <button type="submit" class="change-password-btn" id="submitBtn">
+                    Cambiar Contraseña
+                </button>
+
+                <div class="back-to-profile">
+                    <a href="perfil">Cancelar cambio</a>
+                </div>
+            </form>
+        </section>
+
+        <section class="change-password-right">
+            <div class="change-password-logo">FinHabits</div>
+            <h2>Mantén tu cuenta segura</h2>
+            <p>Una contraseña fuerte es tu primera línea de defensa contra accesos no autorizados. Actualízala regularmente para mayor seguridad.</p>
+
+            <div class="security-tips">
+                <div class="security-tip">
+                    <i class="fas fa-key"></i>
+                    <span>Usa al menos 8 caracteres</span>
+                </div>
+                <div class="security-tip">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Combina letras, números y símbolos</span>
+                </div>
+                <div class="security-tip">
+                    <i class="fas fa-user-secret"></i>
+                    <span>Evita información personal</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        document.querySelectorAll('.password-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                const icon = this.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        });
+
+        // Password strength checker
+        document.getElementById('nuevaContrasena').addEventListener('input', function() {
+            const password = this.value;
+            const strengthContainer = document.getElementById('passwordStrength');
+            const strengthFill = document.getElementById('strengthFill');
+            const strengthText = document.getElementById('strengthText');
+            
+            if (password.length === 0) {
+                strengthContainer.style.display = 'none';
+                return;
+            }
+            
+            strengthContainer.style.display = 'block';
+            
+            let strength = 0;
+            let feedback = [];
+            
+            // Length check
+            if (password.length >= 8) strength++;
+            else feedback.push('mínimo 8 caracteres');
+            
+            // Lowercase check
+            if (/[a-z]/.test(password)) strength++;
+            else feedback.push('minúsculas');
+            
+            // Uppercase check
+            if (/[A-Z]/.test(password)) strength++;
+            else feedback.push('mayúsculas');
+            
+            // Number check
+            if (/\d/.test(password)) strength++;
+            else feedback.push('números');
+            
+            // Special character check
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
+            else feedback.push('símbolos');
+            
+            // Update strength bar
+            strengthFill.className = 'strength-fill';
+            if (strength <= 2) {
+                strengthFill.classList.add('strength-weak');
+                strengthText.textContent = 'Débil - Falta: ' + feedback.join(', ');
+                strengthText.style.color = '#dc3545';
+            } else if (strength === 3) {
+                strengthFill.classList.add('strength-medium');
+                strengthText.textContent = 'Media - Falta: ' + feedback.join(', ');
+                strengthText.style.color = '#ffc107';
+            } else if (strength === 4) {
+                strengthFill.classList.add('strength-strong');
+                strengthText.textContent = 'Fuerte - Falta: ' + feedback.join(', ');
+                strengthText.style.color = '#28a745';
+            } else {
+                strengthFill.classList.add('strength-very-strong');
+                strengthText.textContent = 'Muy fuerte';
+                strengthText.style.color = '#007bff';
+            }
+        });
+
+        // Form validation and submission
+        document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const contrasenaActual = document.getElementById('contrasenaActual').value;
+            const nuevaContrasena = document.getElementById('nuevaContrasena').value;
+            const confirmarContrasena = document.getElementById('confirmarContrasena').value;
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Reset error states
+            document.querySelectorAll('.field-error').forEach(error => {
+                error.style.display = 'none';
+            });
+            
+            let hasError = false;
+            
+            // Validate current password (simulate server validation)
+            if (contrasenaActual.length === 0) {
+                document.getElementById('currentPasswordError').style.display = 'block';
+                hasError = true;
+            }
+            
+            // Validate new password strength
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+            if (!passwordRegex.test(nuevaContrasena)) {
+                document.getElementById('newPasswordError').style.display = 'block';
+                hasError = true;
+            }
+            
+            // Validate password confirmation
+            if (nuevaContrasena !== confirmarContrasena) {
+                document.getElementById('confirmPasswordError').style.display = 'block';
+                hasError = true;
+            }
+            
+            // Check if new password is different from current
+            if (contrasenaActual === nuevaContrasena && contrasenaActual.length > 0) {
+                showAlert('La nueva contraseña debe ser diferente a la actual', 'warning');
+                hasError = true;
+            }
+            
+            if (hasError) return;
+            
+            // Submit form
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cambiando contraseña...';
+            submitBtn.disabled = true;
+            
+            // Simulate server request
+            setTimeout(() => {
+                showAlert('Contraseña cambiada exitosamente', 'success');
+                submitBtn.innerHTML = 'Cambiar Contraseña';
+                submitBtn.disabled = false;
+                
+                // Redirect after success
+                setTimeout(() => {
+                    window.location.href = 'perfil';
+                }, 2000);
+            }, 2000);
+        });
+
+        // Alert function
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            
+            alertContainer.innerHTML = '';
+            alertContainer.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+
+</html>

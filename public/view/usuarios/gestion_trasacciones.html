@@ -1,64 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinHabits | Registro de Ingresos y Gastos</title>
-<link rel="stylesheet" href="/Css/Index.css">
+    <Trasaccion charset="UTF-8">
+    <Trasaccion name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinHabits | Visualización de Trasaccions</title>
+        <link rel="stylesheet" href="/Css/Index.css">
+        <link rel="stylesheet" href="/css/reportes.css">
+    <link rel="stylesheet" href="/Css/gestion_metas.css">
     <link rel="stylesheet" href="/Css/formulario.css">
-    <link rel="stylesheet" href="/Css/ingreso_gasto.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav container">
-
-            
-            <div class="nav__logo">
-                <img src="../../Img/logo1.png">
-                <span>Finhabits</span>
-            </div>
-            <ul class="nav__menu">
-                <li class="nav__item">
-                    <a href="calculadora" class="nav__link">Calculadora</a>
-                </li>
-                <li class="nav__item">
-                    <a href="historial" class="nav__link">Historial</a>
-                </li>
-                <li class="nav__item">
-                    <a href="graficos" class="nav__link">Graficos</a>
-                </li>
-                <li class="nav__item">
-                    <a href="reportes" class="nav__link">Reportes</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
     <main class="main-content">
-        <h1 class="form-title-outside">Registro de Trasacciones</h1>
-        <section class="registro-section">
-            <div class="registro-container">
-                <div class="registro-card ingresos-card">
-                    <form class="registro-form">
-                        <input type="number" placeholder="Nombre de la Trasaccion" class="input-field" step="0.01" min="0" required>
-                        <select class="input-field" required>
-                            <option value="">Categoria</option>
-                            <option value="salario">Salario</option>
-                            <option value="freelance">Trabajo Freelance</option>
-                            <option value="negocio">Negocio Propio</option>
-                            <option value="inversion">Inversiones</option>
-                            <option value="regalo">Regalo/Bono</option>
-                            <option value="otro">Otro</option>
-                        </select>
-                        <input type="number" placeholder="Monto de la Trasaccion" class="input-field" step="0.01" min="0" required>
-                        <button type="submit" class="btn-agregar">Agregar Trasaccion</button>
-                    </form>
+        <a href="/perfil" class="back-home">
+                <i class="fas fa-arrow-left"></i>
+                <p>Volver al inicio</p>
+            </a>
+        <div class="goals-container">
+            <div class="goals-header">
+                <h1 class="goals-title">Gestion de Trasacciones</h1>
+            </div>
+
+            <div class="add-goal-section">
+                <button class="btn-add-goal" onclick="openModal('add')">
+                    <i class="fas fa-plus"></i> Agregar Nueva Trasaccion
+                </button>
+            </div>
+
+            <div class="filters-section">
+                <div class="filters-container">
+                    <div class="filter-column">
+                        <span class="filter" placeholder="Filtros">Filtros</span>
+                    </div>
+                    <div class="filter-column">
+                        <input type="date" class="filter-input" placeholder="fecha">
+                    </div>
+                    <div class="filter-column">
+                        <input type="number" class="filter-input" placeholder="Cantidad" step="0.01">
+                    </div>
+                    <div class="filter-column">
+                    <select id="categoria" class="filter-input">
+                        <option>Categoria</option>
+                        <option>Ingresos</option>
+                        <option>Gastos</option>
+                        <option>Trasacciones</option>
+                        <option>Inversiones</option>
+                    </select>
+                </div>
+                    <button class="implementar" onclick="implementar()">
+                    Implementar
+                </button>
                 </div>
             </div>
-        </section>
+
+            <div class="goals-list" id="goalsList">
+            </div>
+        </div>
     </main>
 
+    <!-- Modal for Add/Edit Goal -->
+    <div id="goalModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2 class="modal-title" id="modalTitle">Agregar Trasaccion</h2>
+            </div>
+            <form id="goalForm">
+                <div class="form-group">
+                    <label class="form-label" for="goalDate">Fecha Objetivo:</label>
+                    <input type="date" class="form-input" id="goalDate" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="goalAmount">Cantidad Trasaccion:</label>
+                    <input type="number" class="form-input" id="goalAmount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="goalCategory">Categoría:</label>
+                    <input type="text" class="form-input" id="goalCategory" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="goalCurrentAmount">Cantidad Actual:</label>
+                    <input type="number" class="form-input" id="goalCurrentAmount" step="0.01" value="0">
+                </div>
+                <button type="submit" class="btn-save">Guardar Trasaccion</button>
+                <button type="button" class="btn-cancel" onclick="closeModal()">Cancelar</button>
+            </form>
+        </div>
+    </div>
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-top">
@@ -86,7 +115,7 @@
                         <li><a href="#">Calculadora Financiera</a></li>
                         <li><a href="#">Historial Financiero</a></li>
                         <li><a href="#">Análisis y Gráficos</a></li>
-                        <li><a href="#">Metas Financieras</a></li>
+                        <li><a href="#">Trasaccions Financieras</a></li>
                     </ul>
                 </div>
                 <div class="footer-section social-section">
@@ -112,5 +141,6 @@
             </div>
         </div>
     </footer>
+    <script src="../../Js/gestion_trasacciones.js"></script>
 </body>
 </html>

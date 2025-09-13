@@ -1,9 +1,3 @@
-// perfil.js - Sistema completo de gestión financiera
-
-// ============================================================
-// SISTEMA DE GESTIÓN DE METAS COMPARTIDO
-// ============================================================
-
 class SharedGoalsManager {
     constructor() {
         this.storageKey = 'finhabits_goals';
@@ -22,7 +16,8 @@ class SharedGoalsManager {
         }
         
         // Datos iniciales de ejemplo si no hay nada guardado
-        return [];
+        return [
+        ];
     }
 
     // Guardar metas en almacenamiento del navegador
@@ -131,152 +126,15 @@ class SharedGoalsManager {
     }
 }
 
-// ============================================================
-// SISTEMA DE GESTIÓN DE INGRESOS Y GASTOS COMPARTIDO
-// ============================================================
-
-class SharedIncomeExpensesManager {
-    constructor() {
-        this.storageKey = 'finhabits_income_expenses';
-        this.transactions = this.loadTransactionsFromStorage();
-    }
-
-    // Cargar transacciones desde almacenamiento del navegador
-    loadTransactionsFromStorage() {
-        try {
-            const stored = localStorage.getItem(this.storageKey);
-            if (stored) {
-                return JSON.parse(stored);
-            }
-        } catch (e) {
-            console.error('Error loading transactions from storage:', e);
-        }
-        
-        return [];
-    }
-
-    // Guardar transacciones en almacenamiento del navegador
-    saveTransactionsToStorage() {
-        try {
-            localStorage.setItem(this.storageKey, JSON.stringify(this.transactions));
-            // Disparar evento personalizado para notificar cambios
-            window.dispatchEvent(new CustomEvent('transactionsUpdated', { 
-                detail: { transactions: this.transactions } 
-            }));
-        } catch (e) {
-            console.error('Error saving transactions to storage:', e);
-        }
-    }
-
-    // Obtener todas las transacciones
-    getAllTransactions() {
-        return [...this.transactions];
-    }
-
-    // Agregar nueva transacción
-    addTransaction(transactionData) {
-        const newTransaction = {
-            id: Math.max(...this.transactions.map(t => t.id), 0) + 1,
-            type: transactionData.type, // 'income' o 'expense'
-            amount: parseFloat(transactionData.amount),
-            category: transactionData.category,
-            date: new Date().toISOString().split('T')[0], // Fecha actual
-            timestamp: new Date().getTime()
-        };
-        
-        this.transactions.push(newTransaction);
-        this.saveTransactionsToStorage();
-        return newTransaction;
-    }
-
-    // Calcular totales
-    calculateTotals() {
-        let totalIncome = 0;
-        let totalExpenses = 0;
-
-        this.transactions.forEach(transaction => {
-            if (transaction.type === 'income') {
-                totalIncome += transaction.amount;
-            } else if (transaction.type === 'expense') {
-                totalExpenses += transaction.amount;
-            }
-        });
-
-        return {
-            totalIncome,
-            totalExpenses,
-            balance: totalIncome - totalExpenses
-        };
-    }
-
-    // Calcular totales del mes actual
-    calculateMonthlyTotals() {
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth();
-        const currentYear = currentDate.getFullYear();
-        
-        let monthlyIncome = 0;
-        let monthlyExpenses = 0;
-
-        this.transactions.forEach(transaction => {
-            const transactionDate = new Date(transaction.date);
-            if (transactionDate.getMonth() === currentMonth && 
-                transactionDate.getFullYear() === currentYear) {
-                
-                if (transaction.type === 'income') {
-                    monthlyIncome += transaction.amount;
-                } else if (transaction.type === 'expense') {
-                    monthlyExpenses += transaction.amount;
-                }
-            }
-        });
-
-        return {
-            monthlyIncome,
-            monthlyExpenses,
-            monthlyBalance: monthlyIncome - monthlyExpenses
-        };
-    }
-
-    // Formatear moneda
-    formatCurrency(amount) {
-        return new Intl.NumberFormat('es-CO', {
-            style: 'currency',
-            currency: 'COP',
-            minimumFractionDigits: 0
-        }).format(amount);
-    }
-
-    // Obtener transacciones recientes (últimas 10)
-    getRecentTransactions(limit = 10) {
-        return this.transactions
-            .sort((a, b) => b.timestamp - a.timestamp)
-            .slice(0, limit);
-    }
-
-    // Eliminar transacción
-    deleteTransaction(transactionId) {
-        const initialLength = this.transactions.length;
-        this.transactions = this.transactions.filter(t => t.id !== transactionId);
-        
-        if (this.transactions.length < initialLength) {
-            this.saveTransactionsToStorage();
-            return true;
-        }
-        return false;
-    }
-}
-
-// Crear instancias globales
+// Crear instancia global
 window.sharedGoals = new SharedGoalsManager();
-window.sharedIncomeExpenses = new SharedIncomeExpensesManager();
 
 // ============================================================
-// FUNCIONES ESPECÍFICAS PARA GESTIÓN DE METAS (gestion_metas.html)
+// FUNCIONES ESPECÃFICAS PARA GESTIÃ“N DE METAS (gestion_metas.html)
 // ============================================================
 
 function initGoalsManagement() {
-    // Solo ejecutar si estamos en la página de gestión de metas
+    // Solo ejecutar si estamos en la pÃ¡gina de gestiÃ³n de metas
     if (!document.getElementById('goalsList')) return;
 
     renderGoalsList();
@@ -382,7 +240,7 @@ function editGoal(goalId) {
 }
 
 function deleteGoal(goalId) {
-    if (confirm('¿Estás seguro de que deseas eliminar esta meta?')) {
+    if (confirm('Â¿EstÃ¡s seguro de que deseas eliminar esta meta?')) {
         if (window.sharedGoals.deleteGoal(goalId)) {
             renderGoalsList();
             showNotification('Meta eliminada exitosamente');
@@ -390,78 +248,39 @@ function deleteGoal(goalId) {
     }
 }
 
-// ============================================================
-// FUNCIONES ESPECÍFICAS PARA REGISTRO DE INGRESOS Y GASTOS (ingreso_gasto.html)
-// ============================================================
-
-function initIncomeExpensesForms() {
-    // Solo ejecutar si estamos en la página de registro
-    if (!document.querySelector('.registro-section')) return;
-
-    setupIncomeForm();
-    setupExpenseForm();
-}
-
-function setupIncomeForm() {
-    const incomeForm = document.querySelector('.ingresos-card .registro-form');
-    if (!incomeForm) return;
-
-    incomeForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const amount = parseFloat(incomeForm.querySelector('input[type="number"]').value);
-        const category = incomeForm.querySelector('select').value;
-        
-        if (!amount || !category) {
-            showNotification('Por favor completa todos los campos', 'error');
-            return;
-        }
-
-        const transactionData = {
-            type: 'income',
-            amount: amount,
-            category: category
-        };
-        
-        window.sharedIncomeExpenses.addTransaction(transactionData);
-        incomeForm.reset();
-        showNotification('Ingreso registrado exitosamente', 'success');
-    });
-}
-
-function setupExpenseForm() {
-    const expenseForm = document.querySelector('.gastos-card .registro-form');
-    if (!expenseForm) return;
-
-    expenseForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const amount = parseFloat(expenseForm.querySelector('input[type="number"]').value);
-        const category = expenseForm.querySelector('select').value;
-        
-        if (!amount || !category) {
-            showNotification('Por favor completa todos los campos', 'error');
-            return;
-        }
-
-        const transactionData = {
-            type: 'expense',
-            amount: amount,
-            category: category
-        };
-        
-        window.sharedIncomeExpenses.addTransaction(transactionData);
-        expenseForm.reset();
-        showNotification('Gasto registrado exitosamente', 'success');
-    });
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed; top: 20px; right: 20px; z-index: 1000;
+        background: #8cc08cff; color: #000000; padding: 15px 20px;
+        border-radius: 8px; border: 2px solid #000;
+        font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transform: translateX(100%); transition: transform 0.3s ease;
+    `;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 300);
+    }, 3000);
 }
 
 // ============================================================
-// FUNCIONES ESPECÍFICAS PARA PERFIL (perfilU.html)
+// FUNCIONES ESPECÃFICAS PARA PERFIL (perfilU.html)
 // ============================================================
 
 function initProfileGoals() {
-    // Solo ejecutar si estamos en la página de perfil
+    // Solo ejecutar si estamos en la pÃ¡gina de perfil
     if (!document.querySelector('.goals-list')) return;
 
     renderProfileGoals();
@@ -510,81 +329,13 @@ function renderProfileGoals() {
     }).join('');
 }
 
-function initProfileIncomeExpenses() {
-    // Solo ejecutar si estamos en la página de perfil
-    if (!document.querySelector('.investment-grid')) return;
-
-    renderProfileFinancialData();
-    setupProfileIncomeExpensesEventListeners();
-}
-
-function renderProfileFinancialData() {
-    const totals = window.sharedIncomeExpenses.calculateTotals();
-    const monthlyTotals = window.sharedIncomeExpenses.calculateMonthlyTotals();
-    
-    // Actualizar Balance Diario
-    updateDailyBalance(totals);
-    
-    // Actualizar Balance General
-    updateGeneralBalance(totals, monthlyTotals);
-}
-
-function updateDailyBalance(totals) {
-    const investmentGrid = document.querySelector('.investment-grid');
-    if (!investmentGrid) return;
-
-    // Buscar y actualizar los elementos existentes
-    const items = investmentGrid.querySelectorAll('.investment-item');
-    
-    items.forEach(item => {
-        const name = item.querySelector('.investment-name').textContent;
-        const valueElement = item.querySelector('.investment-value');
-        
-        switch(name) {
-            case 'Ingresos':
-                valueElement.textContent = window.sharedIncomeExpenses.formatCurrency(totals.totalIncome);
-                break;
-            case 'Gatos': // Mantener el typo original del HTML
-                valueElement.textContent = window.sharedIncomeExpenses.formatCurrency(totals.totalExpenses);
-                break;
-        }
-    });
-}
-
-function updateGeneralBalance(totals, monthlyTotals) {
-    const balanceGrid = document.querySelector('.balance-grid');
-    if (!balanceGrid) return;
-
-    const items = balanceGrid.querySelectorAll('.balance-item');
-    
-    items.forEach(item => {
-        const label = item.querySelector('.balance-label').textContent;
-        const valueElement = item.querySelector('.balance-value');
-        const changeElement = item.querySelector('.balance-change');
-        
-        switch(label) {
-            case 'Total Disponible':
-                valueElement.textContent = window.sharedIncomeExpenses.formatCurrency(Math.max(totals.balance, 0));
-                const balanceChange = monthlyTotals.monthlyBalance;
-                if (balanceChange >= 0) {
-                    changeElement.textContent = `+${window.sharedIncomeExpenses.formatCurrency(balanceChange)} este mes`;
-                    changeElement.className = 'balance-change positive';
-                } else {
-                    changeElement.textContent = `${window.sharedIncomeExpenses.formatCurrency(balanceChange)} este mes`;
-                    changeElement.className = 'balance-change negative';
-                }
-                break;
-        }
-    });
-}
-
 function setupProfileEventListeners() {
-    // Actualizar metas del perfil cuando cambien en gestión
+    // Actualizar metas del perfil cuando cambien en gestiÃ³n
     window.addEventListener('goalsUpdated', function(event) {
         renderProfileGoals();
     });
 
-    // Actualizar el botón "Gestionar Meta" para redirigir a la página de gestión
+    // Actualizar el botÃ³n "Gestionar Meta" para redirigir a la pÃ¡gina de gestiÃ³n
     const manageBtn = document.querySelector('.card-action[href="gestion_metas.html"]');
     if (manageBtn) {
         manageBtn.textContent = 'Gestionar Metas';
@@ -595,116 +346,29 @@ function setupProfileEventListeners() {
     }
 }
 
-function setupProfileIncomeExpensesEventListeners() {
-    // Actualizar datos del perfil cuando cambien las transacciones
-    window.addEventListener('transactionsUpdated', function(event) {
-        renderProfileFinancialData();
-    });
-}
-
 // ============================================================
-// FUNCIONES UTILITARIAS COMPARTIDAS
-// ============================================================
-
-function showNotification(message, type = 'success') {
-    const notification = document.createElement('div');
-    const backgroundColor = type === 'success' ? '#d4edda' : '#f8d7da';
-    const textColor = type === 'success' ? '#155724' : '#721c24';
-    
-    notification.style.cssText = `
-        position: fixed; top: 20px; right: 20px; z-index: 1000;
-        background: ${backgroundColor}; color: ${textColor}; padding: 15px 20px;
-        border-radius: 8px; border: 2px solid #000;
-        font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        transform: translateX(100%); transition: transform 0.3s ease;
-        max-width: 300px;
-    `;
-    notification.textContent = message;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-    }, 100);
-    
-    setTimeout(() => {
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.remove();
-            }
-        }, 300);
-    }, 3000);
-}
-
-function openModal(mode, goalId = null) {
-    const modal = document.getElementById('goalModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const form = document.getElementById('goalForm');
-    
-    if (mode === 'add') {
-        modalTitle.textContent = 'Agregar Meta';
-        form.reset();
-        editingGoalId = null;
-    } else if (mode === 'edit') {
-        modalTitle.textContent = 'Editar Meta';
-        editingGoalId = goalId;
-        const goal = window.sharedGoals.getAllGoals().find(g => g.id === goalId);
-        if (goal) {
-            document.getElementById('goalDate').value = goal.date;
-            document.getElementById('goalAmount').value = goal.amount;
-            document.getElementById('goalCategory').value = goal.category;
-            document.getElementById('goalCurrentAmount').value = goal.currentAmount;
-        }
-    }
-    
-    modal.style.display = 'block';
-}
-
-function closeModal() {
-    const modal = document.getElementById('goalModal');
-    if (modal) {
-        modal.style.display = 'none';
-        window.editingGoalId = null;
-    }
-}
-
-// ============================================================
-// INICIALIZACIÓN AUTOMÁTICA
+// INICIALIZACIÃ“N AUTOMÃTICA
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar según la página actual
+    // Inicializar segÃºn la pÃ¡gina actual
     if (document.getElementById('goalsList')) {
         // Estamos en gestion_metas.html
         initGoalsManagement();
-    } else if (document.querySelector('.registro-section')) {
-        // Estamos en ingreso_gasto.html
-        initIncomeExpensesForms();
     } else if (document.querySelector('.goals-list')) {
         // Estamos en perfilU.html
         initProfileGoals();
-        initProfileIncomeExpenses();
     }
 });
 
-// Cerrar modal al hacer clic fuera de él
-window.onclick = function(event) {
-    const modal = document.getElementById('goalModal');
-    if (event.target === modal) {
-        closeModal();
-    }
-}
-
-// Actualizar datos cuando la página se vuelve visible (cambio de pestaña)
+// Actualizar datos cuando la pÃ¡gina se vuelve visible (cambio de pestaÃ±a)
 document.addEventListener('visibilitychange', function() {
     if (!document.hidden) {
-        // Recargar datos cuando la página se vuelve visible
+        // Recargar metas cuando la pÃ¡gina se vuelve visible
         if (document.getElementById('goalsList')) {
             renderGoalsList();
         } else if (document.querySelector('.goals-list')) {
             renderProfileGoals();
-            renderProfileFinancialData();
         }
     }
 });

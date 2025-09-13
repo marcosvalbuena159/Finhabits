@@ -1,4 +1,5 @@
 //importamos mysql12 para la conexion a la base de datos
+require('dotenv').config(); // Esto carga el .env
 const mysql = require('mysql2');
 
 //creamos la conexion a la base de datos usando variables de entorno

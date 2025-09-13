@@ -31,9 +31,9 @@ function renderGoals() {
     if (goals.length === 0) {
         goalsList.innerHTML = `
                     <div class="empty-state">
-                        <i class="fas fa-bullseye"></i>
-                        <h3>No hay metas registradas</h3>
-                        <p>Agrega tu primera meta financiera para comenzar</p>
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                        <h3>No hay trasacciones registradas</h3>
+                        <p>Agrega tu primera Trasaccion para comenzar</p>
                     </div>
                 `;
         return;
@@ -73,11 +73,11 @@ function openModal(mode, goalId = null) {
     const form = document.getElementById('goalForm');
 
     if (mode === 'add') {
-        modalTitle.textContent = 'Agregar Meta';
+        modalTitle.textContent = 'Agregar Trasaccion';
         form.reset();
         editingGoalId = null;
     } else if (mode === 'edit') {
-        modalTitle.textContent = 'Editar Meta';
+        modalTitle.textContent = 'Editar Trasaccion';
         editingGoalId = goalId;
         const goal = goals.find(g => g.id === goalId);
         if (goal) {
@@ -101,7 +101,7 @@ function editGoal(goalId) {
 }
 
 function deleteGoal(goalId) {
-    if (confirm('¿Estás seguro de que deseas eliminar esta meta?')) {
+    if (confirm('¿Estás seguro de que deseas eliminar esta Trasaccion?')) {
         goals = goals.filter(goal => goal.id !== goalId);
         renderGoals();
     }

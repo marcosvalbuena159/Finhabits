@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinHabits | Transforma tu Futuro Financiero</title>
-    <link rel="stylesheet" href="../../../public/Css/Index.css">
-    <link rel="stylesheet" href="../../../public/Css/Perfil.css">
+    <link rel="stylesheet" href="/Css/Index.css">
+    <link rel="stylesheet" href="/Css/Perfil.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
@@ -16,21 +16,21 @@
     <header class="header">
         <nav class="nav container">
             <div class="nav__logo">
-                <img src="../../img/logo1.png ">
+                <img src="/img/logo1.png ">
                 <span>FinHabits</span>
             </div>
             <ul class="nav__menu">
                 <li class="nav__item">
-                    <a href="calculadora" class="nav__link">Calculadora</a>
+                    <a href="/calculadora" class="nav__link">Calculadora</a>
                 </li>
                 <li class="nav__item">
-                    <a href="historial" class="nav__link">Historial</a
+                    <a href="/historial" class="nav__link">Historial</a>
                 </li>
                 <li class="nav__item">
-                    <a href="graficos" class="nav__link">Graficos</a>
+                    <a href="/graficos" class="nav__link">Graficos</a>
                 </li>
                 <li class="nav__item">
-                    <a href="reportes" class="nav__link">Reportes</a>
+                    <a href="/reportes" class="nav__link">Reportes</a>
                 </li>
             </ul>
         </nav>
@@ -92,124 +92,27 @@
                 <div class="card">
                     <div class="card-header">
                         <h2 class="card-title">
-                            <i class="fas fa-chart-line card-icon"></i>
+                            <i class="fa-solid fa-scale-balanced"></i>
                             Balance Diario
                         </h2>
-                        <button class="card-action" onclick="window.location.href='ingreso_gasto.html'">Agregar
-                            Gastos/Ingresos</button>
-                        <button class="card-action" onclick="window.location.href='inversiones.html'">Agregar
-                            Inversiones</button>
-                        <button class="card-action" onclick="window.location.href='gestion_trasacciones.html'">Agregar
-                            Trasacciones</button>
                     </div>
-                    <div class="investment-grid">
-                        <div class="investment-item">
-                            <div class="investment-name">Ingresos</div>
-                            <div class="investment-value">$3,200</div>
-                        </div>
-                        <div class="investment-item">
-                            <div class="investment-name">Gatos</div>
-                            <div class="investment-value">$2,150</div>
-                        </div>
-                        <div class="investment-item">
-                            <div class="investment-name">Inversiones</div>
-                            <div class="investment-value">$1,800</div>
-                        </div>
-                        <div class="investment-item">
-                            <div class="investment-name">Trasacciones</div>
-                            <div class="investment-value">$1,800</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i class="fas fa-bullseye card-icon"></i>
-                            Mis Metas
-                        </h2>
-                        <button class="card-action" href="gestion_metas.html">Gestionar Meta</button>
-                    </div>
-                    <div class="goals-list">
-                        <div class="goal-item">
-                            <div class="goal-header">
-                                <span class="goal-name">Fondo de Emergencia</span>
-                                <span class="goal-percentage">78%</span>
-                            </div>
-                            <div class="goal-progress">
-                                <div class="goal-progress-fill" style="width: 78%"></div>
-                            </div>
-                            <div class="goal-details">
-                                <span>$7,800 / $10,000</span>
-                                <span>3 meses restantes</span>
-                            </div>
-                        </div>
-                        <div class="goal-item">
-                            <div class="goal-header">
-                                <span class="goal-name">Vacaciones Europa</span>
-                                <span class="goal-percentage">45%</span>
-                            </div>
-                            <div class="goal-progress">
-                                <div class="goal-progress-fill" style="width: 45%"></div>
-                            </div>
-                            <div class="goal-details">
-                                <span>$2,250 / $5,000</span>
-                                <span>8 meses restantes</span>
-                            </div>
-                        </div>
-                        <div class="goal-item">
-                            <div class="goal-header">
-                                <span class="goal-name">Auto Nuevo</span>
-                                <span class="goal-percentage">23%</span>
-                            </div>
-                            <div class="goal-progress">
-                                <div class="goal-progress-fill" style="width: 23%"></div>
-                            </div>
-                            <div class="goal-details">
-                                <span>$4,600 / $20,000</span>
-                                <span>18 meses restantes</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="content-right">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i class="fas fa-wallet card-icon"></i>
-                            Balance General
-                        </h2>
-                        <button class="card-action">Ver Detalles</button>
-                    </div>
-                    <div class="balance-grid">
-                        <div class="balance-item">
-                            <div class="balance-left">
-                                <div class="balance-value">$4,750</div>
-                                <div class="balance-label">Total Disponible</div>
-                            </div>
-                            <div class="balance-change positive">+5.2% este mes</div>
-                        </div>
-                        <div class="balance-item">
-                            <div class="balance-left">
-                                <div class="balance-value">$1,200</div>
-                                <div class="balance-label">Total Deudas</div>
-                            </div>
-                            <div class="balance-change negative">-$300 este mes</div>
-                        </div>
-                        <div class="balance-item">
-                            <div class="balance-left">
-                                <div class="balance-value">$8,950</div>
-                                <div class="balance-label">Ahorros</div>
-                            </div>
-                            <div class="balance-change positive">+12.5% este mes</div>
-                        </div>
-                        <div class="balance-item">
-                            <div class="balance-left">
-                                <div class="balance-value">$2,100</div>
-                                <div class="balance-label">Fondos</div>
-                            </div>
-                            <div class="balance-change positive">+$500 este mes</div>
-                        </div>
+                    <div class="quick-actions">
+                        <button class="quick-action" onclick="window.location.href='/ingresos_gastos'">
+                            <i class="fas fa-plus"></i>
+                            <div class="quick-action-text">Ingresos</div>
+                        </button>
+                        <button class="quick-action" onclick="window.location.href='/ingresos_gastos'">
+                            <i class="fa-solid fa-minus"></i>
+                            <div class="quick-action-text">Gastos</div>
+                        </button>
+                        <button class="quick-action" onclick="window.location.href='/inversiones'">
+                            <i class="fa-solid fa-money-bill-trend-up"></i>
+                            <div class="quick-action-text">Inversiones</div>
+                        </button>
+                        <button class="quick-action" onclick="window.location.href='/gestion_trasacciones'">
+                            <i class="fas fa-exchange-alt"></i>
+                            <div class="quick-action-text">Trasacciones</div>
+                        </button>
                     </div>
                 </div>
                 <div class="card">
@@ -220,22 +123,62 @@
                         </h2>
                     </div>
                     <div class="quick-actions">
-                        <div class="quick-action">
-                            <i class="fas fa-plus"></i>
-                            <div class="quick-action-text">Calculadora</div>
-                        </div>
-                        <div class="quick-action">
-                            <i class="fas fa-chart-line card-icon"></i>
-                            <div class="quick-action-text">Graficos</div>
-                        </div>
-                        <div class="quick-action">
-                            <i class="fas fa-exchange-alt"></i>
-                            <div class="quick-action-text">Consejos</div>
-                        </div>
-                        <div class="quick-action">
-                            <i class="fas fa-piggy-bank"></i>
-                            <div class="quick-action-text">Historial</div>
-                        </div>
+                        <button class="quick-action" onclick="window.location.href='/Metas'">
+                            <i class="fa-brands fa-font-awesome"></i>
+                            <div class="quick-action-text">Metas</div>
+                        </button>
+                        <button class="quick-action" onclick="window.location.href='/Reportes'">
+                            <i class="fa-solid fa-file"></i>
+                            <div class="quick-action-text">Reportes</div>
+                        </button>
+                        <button class="quick-action" onclick="window.location.href='/Editar_Perfil'">
+                            <i class="fa-solid fa-sliders"></i>
+                            <div class="quick-action-text">Editar Perfil</div>
+                        </button>
+                        <button class="quick-action" onclick="window.location.href='/Personalizar_Perfil'">
+                            <i class="fa-solid fa-gear"></i>
+                            <div class="quick-action-text">Personalizar perfil</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="content-right">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-wallet card-icon"></i>
+                            Balance General
+                        </h2>
+                    </div>
+                    <div class="balance-grid">
+                        <button class="balance-item">
+                            <div class="balance-left">
+                                <div class="balance-value">$4,750</div>
+                                <div class="balance-label">Total Disponible</div>
+                            </div>
+                            <div class="balance-change positive">+5.2% este mes</div>
+                        </button>
+                        <button class="balance-item">
+                            <div class="balance-left">
+                                <div class="balance-value">$1,200</div>
+                                <div class="balance-label">Total Deudas</div>
+                            </div>
+                            <div class="balance-change negative">-$300 este mes</div>
+                        </button>
+                        <button class="balance-item">
+                            <div class="balance-left">
+                                <div class="balance-value">$8,950</div>
+                                <div class="balance-label">Ahorros</div>
+                            </div>
+                            <div class="balance-change positive">+12.5% este mes</div>
+                        </button>
+                        <button class="balance-item">
+                            <div class="balance-left">
+                                <div class="balance-value">$2,100</div>
+                                <div class="balance-label">Fondos</div>
+                            </div>
+                            <div class="balance-change positive">+$500 este mes</div>
+                        </button>
                     </div>
                 </div>
             </div>

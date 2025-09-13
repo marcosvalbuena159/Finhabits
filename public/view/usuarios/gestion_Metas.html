@@ -4,37 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinHabits | Visualización de Metas</title>
-        <link rel="stylesheet" href="../../../public/Css/Index.css">
-        <link rel="stylesheet" href="../../css/reportes.css">
-    <link rel="stylesheet" href="../../../public/Css/gestion_metas.css">
+        <link rel="stylesheet" href="/Css/Index.css">
+        <link rel="stylesheet" href="/css/reportes.css">
+    <link rel="stylesheet" href="/Css/gestion_metas.css">
+    <link rel="stylesheet" href="/Css/formulario.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav container">
-            <div class="nav__logo">
-                <img src="../../Img/logo1.png">
-                <span>Finhabits</span>
-            </div>
-            <ul class="nav__menu">
-                <li class="nav__item">
-                    <a href="calculadora" class="nav__link">Calculadora</a>
-                </li>
-                <li class="nav__item">
-                    <a href="historial" class="nav__link">Historial</a>
-                </li>
-                <li class="nav__item">
-                    <a href="graficos" class="nav__link">Graficos</a>
-                </li>
-                <li class="nav__item">
-                    <a href="reportes" class="nav__link">Reportes</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
     <main class="main-content">
+        <a href="/perfil" class="back-home">
+                <i class="fas fa-arrow-left"></i>
+                <p>Volver al inicio</p>
+            </a>
         <div class="goals-container">
             <div class="goals-header">
                 <h1 class="goals-title">Gestion de Metas</h1>
@@ -58,8 +40,17 @@
                         <input type="number" class="filter-input" placeholder="Cantidad" step="0.01">
                     </div>
                     <div class="filter-column">
-                        <input type="text" class="filter-input" placeholder="Categoría">
-                    </div>
+                    <select id="categoria" class="filter-input">
+                        <option>Categoria</option>
+                        <option>Ingresos</option>
+                        <option>Gastos</option>
+                        <option>Trasacciones</option>
+                        <option>Inversiones</option>
+                    </select>
+                </div>
+                    <button class="implementar" onclick="implementar()">
+                    Implementar
+                </button>
                 </div>
             </div>
 
