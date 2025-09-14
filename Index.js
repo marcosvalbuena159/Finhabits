@@ -1,4 +1,3 @@
-// Importamos variales y frameworks necesarios
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -7,30 +6,24 @@ const session = require("express-session");
 const usuarios = require("./routes/usuarios");
 
 const app = express();
-const port = process.env.PORT || 3000; // Definimos el puerto
+const port = process.env.PORT || 3000;
 
-//Permitimos conexion entre back y front
-app.use(express.urlencoded({ extended: true })); //leer formularios HTML
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
 
-//Importamos la conexion a la base de datos
 const conexion = require("./db/conexion");
 
-//Configuracion de la session
 app.use(session({
     secret: "210424*#$Finhabits", 
     resave: false,
     saveUninitialized: false,
 }));
 
-//Rutas de usuario
 app.use("/", usuarios);
 
-//Aceptamos archivos estaticos
 app.use(express.static("public"));
 
-//Importamos las rutas
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "view", "index.html"));
 });
@@ -73,8 +66,11 @@ app.get("/Metas", (req, res) => {
 app.get("/Ingresos_Gastos", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "view", "usuarios", "ingreso_gasto.html"));
 });
-app.get("/Inversiones", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "view", "usuarios", "inversiones.html"));
+app.get("/Inversiones_Fondos", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "view", "usuarios", "inversiones_fondos.html"));
+});
+app.get("/Deudas_Ahorros", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "view", "usuarios", "deudas_ahorros.html"));
 });
 app.get("/Historial", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "view", "usuarios", "historial.html"));
@@ -88,9 +84,22 @@ app.get("/Recuperar_Contrasena", (req, res) => {
 app.get("/Cambio_Contrasena", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "view", "cambio_contraseña.html"));
 });
+app.get("/Analisis_Graficos", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "view", "usuarios","analisis_graficos.html"));
+});
+app.get("/Analisis", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "view", "usuarios", "analisis.html"));
+});
+app.get("/Grafico_Estadistico", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "view", "usuarios", "grafico_estadistico.html"));
+});
+app.get("/Grafico_Progresivo", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "view", "usuarios","grafico_progresivo.html"));
+});
+app.get("/Grafico_Metas", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "view", "usuarios","grafico_metas.html"));
+});
 
-
-//Iniciamos el servidor
 app.listen(port, () => {    
     console.log('Servidor corriendo en el puerto ' + port);
 });

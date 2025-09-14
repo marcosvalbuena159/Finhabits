@@ -27,10 +27,27 @@
                     <a href="/historial" class="nav__link">Historial</a>
                 </li>
                 <li class="nav__item">
-                    <a href="/graficos" class="nav__link">Graficos</a>
+                    <a href="/analisis_graficos" class="nav__link">Graficos</a>
                 </li>
                 <li class="nav__item">
-                    <a href="/reportes" class="nav__link">Reportes</a>
+                    <a href="/recomendaciones" class="nav__link">Recomendaciones</a>
+                </li>
+                <li class="nav__item">
+                    <a href="/consejos" class="nav__link">Consejos</a>
+                </li>
+                <li>
+                    <div class="perfil-menu">
+                        <div class="quick-action" onclick="toggleMenu()">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="menu-desplegable" id="menuDesplegable">
+                            <ul>
+                                <li><a href="#">Ver Perfil</a></li>
+                                <li><a href="#">Configuraciones</a></li>
+                                <li><a href="#">Cerrar sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </nav>
@@ -99,15 +116,15 @@
                     <div class="quick-actions">
                         <button class="quick-action" onclick="window.location.href='/ingresos_gastos'">
                             <i class="fas fa-plus"></i>
-                            <div class="quick-action-text">Ingresos</div>
+                            <div class="quick-action-text">Ingresos/Gastos</div>
                         </button>
-                        <button class="quick-action" onclick="window.location.href='/ingresos_gastos'">
+                        <button class="quick-action" onclick="window.location.href='/deudas_ahorros'">
                             <i class="fa-solid fa-minus"></i>
-                            <div class="quick-action-text">Gastos</div>
+                            <div class="quick-action-text">Deudas/Ahorros</div>
                         </button>
-                        <button class="quick-action" onclick="window.location.href='/inversiones'">
+                        <button class="quick-action" onclick="window.location.href='/inversiones_fondos'">
                             <i class="fa-solid fa-money-bill-trend-up"></i>
-                            <div class="quick-action-text">Inversiones</div>
+                            <div class="quick-action-text">Inversiones/Fondos</div>
                         </button>
                         <button class="quick-action" onclick="window.location.href='/gestion_trasacciones'">
                             <i class="fas fa-exchange-alt"></i>
@@ -244,6 +261,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="../../Js/perfil.js"></script>
     <script src="../../Js/ingresos_gastos.js"></script>
+    <script src="../../Js/menu.js"></script>
 </body>
 
 </html>

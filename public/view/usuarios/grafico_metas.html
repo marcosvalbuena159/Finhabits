@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinHabits | Gráfico de Metas</title>
+    <link rel="stylesheet" href="/Css/Index.css">
+    <link rel="stylesheet" href="/css/reportes.css">
+    <link rel="stylesheet" href="/Css/gestion_metas.css">
+    <link rel="stylesheet" href="/Css/grafico_estadistico.css">
+    <link rel="stylesheet" href="/Css/grafico_metas.css">
+    <link rel="stylesheet" href="/Css/formulario.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+
+<body>
+    <main class="main-content">
+        <a href="/Metas" class="back-home">
+            <i class="fas fa-arrow-left"></i>
+            <p>Volver a Metas</p>
+        </a>
+
+        <div class="page-header">
+            <h1 class="page-title">GRÁFICO DE METAS</h1>
+        </div>
+
+        <div class="statistics-container">
+            <!-- Filtros -->
+            <div class="filters-section">
+                <h2 class="filters-header">Filtros</h2>
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label class="filter-label">Período</label>
+                        <select class="filter-input" id="periodFilter">
+                            <option value="mes">Este mes</option>
+                            <option value="trimestre">Último trimestre</option>
+                            <option value="semestre">Últimos 6 meses</option>
+                            <option value="año">Este año</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Estado</label>
+                        <select class="filter-input" id="statusFilter">
+                            <option value="todas">Todas las metas</option>
+                            <option value="completadas">Completadas</option>
+                            <option value="en-progreso">En progreso</option>
+                            <option value="pendientes">Pendientes</option>
+                            <option value="vencidas">Vencidas</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Categoría</label>
+                        <select class="filter-input" id="categoryFilter">
+                            <option value="todas">Todas las categorías</option>
+                            <option value="ahorros">Ahorros</option>
+                            <option value="inversiones">Inversiones</option>
+                            <option value="deudas">Pago de Deudas</option>
+                            <option value="emergencia">Fondo de Emergencia</option>
+                            <option value="viajes">Viajes</option>
+                            <option value="educacion">Educación</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <button class="btn-filter" onclick="updateCharts()">
+                            <i class="fas fa-filter"></i> Aplicar Filtros
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Métricas Principales -->
+            <div class="goals-summary">
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 class="summary-value" id="totalGoals">8</h3>
+                        <p class="summary-label">Metas Totales</p>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-icon success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 class="summary-value" id="completedGoals">5</h3>
+                        <p class="summary-label">Completadas</p>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-icon progress">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 class="summary-value" id="inProgressGoals">2</h3>
+                        <p class="summary-label">En Progreso</p>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-icon warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 class="summary-value" id="overdue">1</h3>
+                        <p class="summary-label">Vencidas</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráficos -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3 class="chart-title">Estado de las Metas</h3>
+                    <div class="chart-container">
+                        <canvas id="goalsStatusChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3 class="chart-title">Progreso por Categoría</h3>
+                    <div class="chart-container">
+                        <canvas id="categoryProgressChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3 class="chart-title">Evolución Mensual</h3>
+                    <div class="chart-container">
+                        <canvas id="monthlyProgressChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3 class="chart-title">Metas por Monto</h3>
+                    <div class="chart-container">
+                        <canvas id="amountDistributionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-section">
+                    <h3>Nosotros</h3>
+                    <ul>
+                        <li><a href="#">Empresa</a></li>
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Impacto y Testimonios</a></li>
+                        <li><a href="#">Trabaja con Nosotros</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ayuda</h3>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Comentarios</a></li>
+                        <li><a href="#">Soporte Técnico</a></li>
+                        <li><a href="#">Recomendaciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Comienza</h3>
+                    <ul>
+                        <li><a href="#">Calculadora Financiera</a></li>
+                        <li><a href="#">Historial Financiero</a></li>
+                        <li><a href="#">Análisis y Gráficos</a></li>
+                        <li><a href="#">Metas Financieras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section social-section">
+                    <h3>Síguenos</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-solid fa-x"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos de Servicio</a>
+                    <a href="#">Código de Conducta</a>
+                    <a href="#">Soporte</a>
+                </div>
+                <div class="copyright">
+                    © 2025 Finhabits. Todos los derechos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../../Js/grafico_metas.js"></script>
+</body>
+</html>

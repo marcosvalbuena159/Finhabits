@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinHabits | Análisis Financiero</title>
+        <link rel="stylesheet" href="/Css/Index.css">
+    <link rel="stylesheet" href="/Css/formulario.css">
+    <link rel="stylesheet" href="/Css/analisis.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+    <main class="main-content">
+        <a href="/analisis_graficos" class="back-home">
+            <i class="fas fa-arrow-left"></i>
+            <p>Volver</p>
+        </a>
+
+        <div class="page-header">
+            <h1 class="page-title">ANÁLISIS FINANCIERO</h1>
+        </div>
+            <!-- Grid Principal de Análisis -->
+            <div class="analysis-grid">
+                    <div class="chart-card">
+                        <h2 class="chart-title">Flujo de Efectivo Mensual</h2>
+                        <div class="chart-container">
+                            <canvas id="cashFlowChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="spending-breakdown">
+                        <h2 class="breakdown-title">Desglose de Gastos por Categoría</h2>
+                        <div class="breakdown-list">
+                            <div class="breakdown-item">
+                                <div class="breakdown-category">
+                                    <div class="breakdown-icon">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <div class="breakdown-name">Vivienda</div>
+                                </div>
+                                <div class="breakdown-details">
+                                    <div class="breakdown-amount">$1,200</div>
+                                    <div class="breakdown-percentage">37% del total</div>
+                                </div>
+                            </div>
+
+                            <div class="breakdown-item">
+                                <div class="breakdown-category">
+                                    <div class="breakdown-icon">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <div class="breakdown-name">Alimentación</div>
+                                </div>
+                                <div class="breakdown-details">
+                                    <div class="breakdown-amount">$650</div>
+                                    <div class="breakdown-percentage">20% del total</div>
+                                </div>
+                            </div>
+
+                            <div class="breakdown-item">
+                                <div class="breakdown-category">
+                                    <div class="breakdown-icon">
+                                        <i class="fas fa-car"></i>
+                                    </div>
+                                    <div class="breakdown-name">Transporte</div>
+                                </div>
+                                <div class="breakdown-details">
+                                    <div class="breakdown-amount">$480</div>
+                                    <div class="breakdown-percentage">15% del total</div>
+                                </div>
+                            </div>
+
+                            <div class="breakdown-item">
+                                <div class="breakdown-category">
+                                    <div class="breakdown-icon">
+                                        <i class="fas fa-gamepad"></i>
+                                    </div>
+                                    <div class="breakdown-name">Entretenimiento</div>
+                                </div>
+                                <div class="breakdown-details">
+                                    <div class="breakdown-amount">$320</div>
+                                    <div class="breakdown-percentage">10% del total</div>
+                                </div>
+                            </div>
+
+                            <div class="breakdown-item">
+                                <div class="breakdown-category">
+                                    <div class="breakdown-icon">
+                                        <i class="fas fa-heartbeat"></i>
+                                    </div>
+                                    <div class="breakdown-name">Salud</div>
+                                </div>
+                                <div class="breakdown-details">
+                                    <div class="breakdown-amount">$280</div>
+                                    <div class="breakdown-percentage">9% del total</div>
+                                </div>
+                            </div>
+
+                            <div class="breakdown-item">
+                                <div class="breakdown-category">
+                                    <div class="breakdown-icon">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </div>
+                                    <div class="breakdown-name">Otros</div>
+                                </div>
+                                <div class="breakdown-details">
+                                    <div class="breakdown-amount">$310</div>
+                                    <div class="breakdown-percentage">9% del total</div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-section">
+                    <h3>Nosotros</h3>
+                    <ul>
+                        <li><a href="#">Empresa</a></li>
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Impacto y Testimonios</a></li>
+                        <li><a href="#">Trabaja con Nosotros</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ayuda</h3>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Comentarios</a></li>
+                        <li><a href="#">Soporte Técnico</a></li>
+                        <li><a href="#">Recomendaciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Comienza</h3>
+                    <ul>
+                        <li><a href="#">Calculadora Financiera</a></li>
+                        <li><a href="#">Historial Financiero</a></li>
+                        <li><a href="#">Análisis y Gráficos</a></li>
+                        <li><a href="#">Metas Financieras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section social-section">
+                    <h3>Síguenos</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-solid fa-x"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos de Servicio</a>
+                    <a href="#">Código de Conducta</a>
+                    <a href="#">Soporte</a>
+                </div>
+                <div class="copyright">
+                    © 2025 Finhabits. Todos los derechos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../../Js/analisis.js"></script>
+</body>
+</html>

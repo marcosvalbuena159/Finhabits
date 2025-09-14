@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinHabits | Gráfico Progresivo</title>
+    <link rel="stylesheet" href="/Css/Index.css">
+    <link rel="stylesheet" href="/css/reportes.css">
+    <link rel="stylesheet" href="/Css/grafico_progresivo.css">
+    <link rel="stylesheet" href="/Css/formulario.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+    <main class="main-content">
+        <a href="/analisis_graficos" class="back-home">
+            <i class="fas fa-arrow-left"></i>
+            <p>Volver</p>
+        </a>
+
+        <div class="page-header">
+            <h1 class="page-title">GRÁFICO PROGRESIVO</h1>
+        </div>
+
+        <div class="progressive-container">
+            <!-- Controles -->
+            <div class="controls-section">
+                <h2 class="controls-header">Configuración del Progreso</h2>
+                <div class="controls-grid">
+                    <div class="control-group">
+                        <label class="control-label">Meta Financiera</label>
+                        <input type="number" class="control-input" id="metaAmount" value="10000" placeholder="Cantidad objetivo">
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Plazo (meses)</label>
+                        <input type="number" class="control-input" id="plazoMeses" value="12" placeholder="Meses para lograr meta">
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Ahorro Mensual</label>
+                        <input type="number" class="control-input" id="ahorroMensual" value="800" placeholder="Ahorro por mes">
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Tipo de Meta</label>
+                        <select class="control-input" id="tipoMeta">
+                            <option value="ahorro">Ahorro</option>
+                            <option value="inversion">Inversión</option>
+                            <option value="deuda">Pago de Deuda</option>
+                            <option value="emergencia">Fondo de Emergencia</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <button class="btn-update" onclick="updateProgression()">
+                            <i class="fas fa-refresh"></i> Actualizar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Indicadores de Progreso -->
+            <div class="progress-indicators">
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <span class="progress-label">Progreso Total</span>
+                        <span class="progress-percentage" id="progressTotal">65%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFillTotal" style="width: 65%;"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span id="ahorroActual">$6,500</span>
+                        <span id="metaTotal">$10,000</span>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <span class="progress-label">Progreso Mensual</span>
+                        <span class="progress-percentage" id="progressMensual">80%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFillMensual" style="width: 80%;"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span id="ahorroMesActual">$640</span>
+                        <span id="metaMensual">$800</span>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <span class="progress-label">Tiempo Restante</span>
+                        <span class="progress-percentage" id="tiempoRestante">4 meses</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFillTiempo" style="width: 67%;"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span>8 de 12 meses</span>
+                        <span id="fechaObjetivo">Sep 2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico Principal -->
+            <div class="chart-section">
+                <h2 class="chart-title">Evolución del Progreso</h2>
+                <div class="chart-container">
+                    <canvas id="progressChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-section">
+                    <h3>Nosotros</h3>
+                    <ul>
+                        <li><a href="#">Empresa</a></li>
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Impacto y Testimonios</a></li>
+                        <li><a href="#">Trabaja con Nosotros</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ayuda</h3>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Comentarios</a></li>
+                        <li><a href="#">Soporte Técnico</a></li>
+                        <li><a href="#">Recomendaciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Comienza</h3>
+                    <ul>
+                        <li><a href="#">Calculadora Financiera</a></li>
+                        <li><a href="#">Historial Financiero</a></li>
+                        <li><a href="#">Análisis y Gráficos</a></li>
+                        <li><a href="#">Metas Financieras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section social-section">
+                    <h3>Síguenos</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-solid fa-x"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos de Servicio</a>
+                    <a href="#">Código de Conducta</a>
+                    <a href="#">Soporte</a>
+                </div>
+                <div class="copyright">
+                    © 2025 Finhabits. Todos los derechos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../../Js/grafico_progresivo.js"></script>
+</body>
+</html>

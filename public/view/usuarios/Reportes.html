@@ -16,36 +16,46 @@
 <body>
     <div class="report-container">
         <a href="/perfil" class="back-home">
-                <i class="fas fa-arrow-left"></i>
-                <p>Volver al inicio</p>
-            </a>
+            <i class="fas fa-arrow-left"></i>
+            <p>Volver al inicio</p>
+        </a>
         <h1 class="form-title-outside">Reporte</h1>
         <div class="filters-section">
-            <div class="filters-container2">
-                <div class="filter-column">
-                    <span class="filter2" placeholder="Filtros">Filtros</span>
-                </div>
-                <div class="filter-column">
-                    <input type="date" id="fecha1" class="filter-input" placeholder="Fecha 1">
-                </div>
-                <div class="filter-column">
-                    <input type="date" id="fecha2" class="filter-input" placeholder="Fecha 2">
-                </div>
-                <div class="filter-column">
-                    <input type="number" id="cantidad" class="filter-input" placeholder="Cantidad">
-                </div>
-                <div class="filter-column">
-                    <select id="categoria" class="filter-input">
-                        <option>Categoria</option>
-                        <option>Ingresos</option>
-                        <option>Gastos</option>
-                        <option>Trasacciones</option>
-                        <option>Inversiones</option>
+            <h2 class="filters-header">Filtros</h2>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label class="filter-label">Período</label>
+                    <select class="filter-input" id="periodFilter">
+                        <option value="mes">Este mes</option>
+                        <option value="trimestre">Último trimestre</option>
+                        <option value="semestre">Últimos 6 meses</option>
+                        <option value="año">Este año</option>
                     </select>
                 </div>
-                <button class="implementar" onclick="implementar()">
-                    Implementar
-                </button>
+                <div class="filter-group">
+                    <label class="filter-label">Categoría</label>
+                    <select class="filter-input" id="categoryFilter">
+                        <option value="todas">Todas las categorías</option>
+                        <option value="ingresos">Ingresos</option>
+                        <option value="gastos">Gastos</option>
+                        <option value="ahorros">Ahorros</option>
+                        <option value="inversiones">Inversiones</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Tipo de gráfico</label>
+                    <select class="filter-input" id="chartTypeFilter">
+                        <option value="bar">Barras</option>
+                        <option value="pie">Circular</option>
+                        <option value="doughnut">Dona</option>
+                        <option value="line">Líneas</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button class="btn-filter" onclick="updateCharts()">
+                        <i class="fas fa-filter"></i> Aplicar Filtros
+                    </button>
+                </div>
             </div>
         </div>
 

@@ -22,7 +22,7 @@
             <!-- Área de alertas -->
             <div id="alertContainer"></div>
 
-            <form class="auth-form" id="loginForm" action="/usuarios/login" method="POST" accept-charset="utf-8">
+            <form class="auth-form" id="loginForm" action="/login" method="POST" accept-charset="utf-8">
                 <h1>Inicia Sesión</h1>
                 <p class="subtitle">Bienvenido de vuelta, administra tus finanzas de manera inteligente</p>
 
@@ -93,20 +93,7 @@
             </div>
         </section>
     </section>
-    <script>
-        document.querySelector('.toggle-password').addEventListener('click', function () {
-            const passwordInput = document.getElementById('passwordInput');
-            const toggleIcon = document.getElementById('toggleIcon');
-
-            const isPassword = passwordInput.type === 'password';
-            passwordInput.type = isPassword ? 'text' : 'password';
-
-            toggleIcon.classList.toggle('fa-eye');
-            toggleIcon.classList.toggle('fa-eye-slash');
-        });
-
-    </script>
-
+    <script src="../Js/VerContra.js"></script>
+    <script src="../Js/RecordarSesion.js"></script>
 </body>
-
 </html>

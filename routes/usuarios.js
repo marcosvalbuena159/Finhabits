@@ -46,7 +46,7 @@ router.post("/login", (req, res) => {
             nombre: usuario.nombre,
             correo: usuario.correo
         };
-        res.redirect("/view/usuarios/perfil.html");
+        res.redirect("/perfil");
     });
 });
 

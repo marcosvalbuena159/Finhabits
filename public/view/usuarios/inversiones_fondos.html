@@ -1,34 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinHabits | Registro de Ingresos y Gastos</title>
-<link rel="stylesheet" href="/Css/Index.css">
+    <link rel="stylesheet" href="/Css/Index.css">
     <link rel="stylesheet" href="/Css/formulario.css">
     <link rel="stylesheet" href="/Css/ingreso_gasto.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
 </head>
+
 <body>
     <main class="main-content">
         <a href="/perfil" class="back-home">
                 <i class="fas fa-arrow-left"></i>
                 <p>Volver al inicio</p>
             </a>
-        <h1 class="form-title-outside">Registro de Inversiones</h1>
+        <h1 class="form-title-outside">Registro de Inversiones y Fondos</h1>
         <section class="registro-section">
             <div class="registro-container">
                 <div class="registro-card ingresos-card">
+                    <h2>Inversiones</h2>
                     <form class="registro-form">
                         <input type="number" placeholder="Cantidad" class="input-field" step="0.01" min="0" required>
                         <select class="input-field" required>
-                            <option value="">Procedencia</option>
+                            <option value="">Categoria</option>
                             <option value="salario">Salario</option>
                             <option value="freelance">Trabajo Freelance</option>
                             <option value="negocio">Negocio Propio</option>
                             <option value="inversion">Inversiones</option>
                             <option value="regalo">Regalo/Bono</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                        <button type="submit" class="btn-agregar">Agregar</button>
+                    </form>
+                </div>
+
+                <div class="registro-card gastos-card">
+                    <h2>Fondos</h2>
+                    <form class="registro-form">
+                        <input type="number" placeholder="Cantidad" class="input-field" step="0.01" min="0" required>
+                        <select class="input-field" required>
+                            <option value="">Categoria</option>
+                            <option value="alimentacion">Alimentación</option>
+                            <option value="transporte">Transporte</option>
+                            <option value="vivienda">Vivienda</option>
+                            <option value="salud">Salud</option>
+                            <option value="educacion">Educación</option>
+                            <option value="entretenimiento">Entretenimiento</option>
+                            <option value="ropa">Ropa y Accesorios</option>
+                            <option value="servicios">Servicios Públicos</option>
                             <option value="otro">Otro</option>
                         </select>
                         <button type="submit" class="btn-agregar">Agregar</button>
@@ -91,5 +115,7 @@
             </div>
         </div>
     </footer>
+    <script src="../../Js/ingresos_gastos.js"></script>
 </body>
+
 </html>

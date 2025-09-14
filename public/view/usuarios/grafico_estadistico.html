@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinHabits | Visualización de Metas</title>
-        <link rel="stylesheet" href="/Css/Index.css">
-        <link rel="stylesheet" href="/css/reportes.css">
-    <link rel="stylesheet" href="/Css/gestion_metas.css">
+    <title>FinHabits | Gráfico Estadístico</title>
+    <link rel="stylesheet" href="/Css/Index.css">
+    <link rel="stylesheet" href="/css/reportes.css">
+    <link rel="stylesheet" href="/Css/grafico_estadistico.css">
     <link rel="stylesheet" href="/Css/formulario.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 </head>
+
 <body>
     <main class="main-content">
-        <a href="/perfil" class="back-home">
-                <i class="fas fa-arrow-left"></i>
-                <p>Volver al inicio</p>
-            </a>
-        <div class="goals-container">
-            <div class="goals-header">
-                <h1 class="goals-title">Gestion de Metas</h1>
-            </div>
+        <a href="/analisis_graficos" class="back-home">
+            <i class="fas fa-arrow-left"></i>
+            <p>Volver</p>
+        </a>
 
-            <div class="add-goal-section">
-                <button class="btn-add-goal" onclick="openModal('add')">
-                    <i class="fas fa-plus"></i> Agregar Nueva Meta
-                </button>
-                <button class="btn-add-goal" onclick="window.location.href='/Grafico_Metas'">
-                     Graficos
-                </button>
-            </div>
+        <div class="page-header">
+            <h1 class="page-title">GRÁFICO ESTADÍSTICO</h1>
+        </div>
 
+        <div class="statistics-container">
+            <!-- Filtros -->
             <div class="filters-section">
                 <h2 class="filters-header">Filtros</h2>
                 <div class="filters-grid">
@@ -70,40 +67,39 @@
                 </div>
             </div>
 
-            <div class="goals-list" id="goalsList">
+            <!-- Gráficos -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3 class="chart-title">Distribución por Categorías</h3>
+                    <div class="chart-container">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3 class="chart-title">Ingresos vs Gastos</h3>
+                    <div class="chart-container">
+                        <canvas id="incomeExpenseChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3 class="chart-title">Comparativa Mensual</h3>
+                    <div class="chart-container">
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3 class="chart-title">Tendencias de Gastos</h3>
+                    <div class="chart-container">
+                        <canvas id="trendsChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Modal for Add/Edit Goal -->
-    <div id="goalModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h2 class="modal-title" id="modalTitle">Agregar Meta</h2>
-            </div>
-            <form id="goalForm">
-                <div class="form-group">
-                    <label class="form-label" for="goalDate">Fecha Objetivo:</label>
-                    <input type="date" class="form-input" id="goalDate" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="goalAmount">Cantidad Meta:</label>
-                    <input type="number" class="form-input" id="goalAmount" step="0.01" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="goalCategory">Categoría:</label>
-                    <input type="text" class="form-input" id="goalCategory" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="goalCurrentAmount">Cantidad Actual:</label>
-                    <input type="number" class="form-input" id="goalCurrentAmount" step="0.01" value="0">
-                </div>
-                <button type="submit" class="btn-save">Guardar Meta</button>
-                <button type="button" class="btn-cancel" onclick="closeModal()">Cancelar</button>
-            </form>
-        </div>
-    </div>
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-top">
@@ -157,7 +153,7 @@
             </div>
         </div>
     </footer>
-    <script src="../../Js/gestion_metas.js"></script>
-    <script src="../../Js/perfil.js"></script>
+    <script src="../../Js/grafico_estadistico.js"></script>
 </body>
+
 </html>

@@ -9,77 +9,71 @@
 }
 
         .filters-section {
-            margin-bottom: 40px;
-        }
-
-        .filters-container {
             background: #112e54;
             border: 3px solid #000000;
             border-radius: 20px;
             padding: 25px;
-            display: grid;
-            grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
-            gap: 20px;
-            align-items: end;
-            transition: all 0.3s ease;
-        }
-        .filters-container2 {
-            background: #112e54;
-            border: 3px solid #000000;
-            border-radius: 20px;
-            padding: 25px;
-            display: grid;
-            grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
-            gap: 20px;
-            align-items: end;
-            transition: all 0.3s ease;
+            margin-bottom: 30px;
         }
 
-        .filters-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px #e0edff;
-        }
-        .filters-container2:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px #e0edff;
+        .filters-header {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        .filter-column {
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            align-items: end;
+        }
+
+        .filter-group {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .filter-label {
-            font-size: 1.2rem;
-            font-weight: 700;
             color: #ffffff;
-            text-transform: lowercase;
-            text-align: center;
-            letter-spacing: 1px;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
         .filter-input {
-            padding: 15px 20px;
-            border: 3px solid #000000;
-            border-radius: 12px;
+            padding: 12px 15px;
+            border: 2px solid #000000;
+            border-radius: 8px;
             background: #e0edff;
             color: #112e54;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            text-align: center;
-            transition: all 0.3s ease;
-            outline: none;
         }
 
         .filter-input:focus {
+            outline: none;
             background: #f1f7ff;
             border-color: #ffffff;
-            transform: scale(1.02);
         }
 
-        .filter-input::placeholder {
+        .btn-filter {
+            background: #e0edff;
             color: #112e54;
+            border: 2px solid #000000;
+            border-radius: 8px;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-filter:hover {
+            background: #f1f7ff;
+            transform: translateY(-2px);
         }
         .filter {
             padding: 15px 20px;
